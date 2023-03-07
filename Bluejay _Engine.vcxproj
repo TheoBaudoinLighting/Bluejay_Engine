@@ -171,6 +171,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\bvh\bje_aabb.cpp" />
+    <ClCompile Include="engine\bvh\bje_aarect.cpp" />
+    <ClCompile Include="engine\bvh\bje_bvh.cpp" />
+    <ClCompile Include="engine\bvh\bje_onb.cpp" />
+    <ClCompile Include="engine\user_interface\bje_debug.cpp" />
+    <ClCompile Include="engine\user_interface\bje_log_console.cpp" />
     <ClCompile Include="engine\impl\bje_embree.cpp" />
     <ClCompile Include="engine\impl\bje_imgui.cpp" />
     <ClCompile Include="engine\impl\bje_opengl.cpp" />
@@ -187,6 +193,12 @@
     <ClCompile Include="engine\external\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\bvh\bje_aabb.h" />
+    <ClInclude Include="engine\bvh\bje_aarect.h" />
+    <ClInclude Include="engine\bvh\bje_bvh.h" />
+    <ClInclude Include="engine\bvh\bje_onb.h" />
+    <ClInclude Include="engine\user_interface\bje_debug.h" />
+    <ClInclude Include="engine\user_interface\bje_log_console.h" />
     <ClInclude Include="engine\impl\bje_context.h" />
     <ClInclude Include="engine\impl\bje_embree.h" />
     <ClInclude Include="engine\impl\bje_imgui.h" />

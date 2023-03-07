@@ -1,45 +1,49 @@
 
 #include <iostream>
 
+#include "glad/glad.h"
 #include "bje_window.h"
 
-
+// imgui
 #include "imgui.h"
+
+// ui
+#include "user_interface/bje_debug.h"
+
+
 
 bool BJE_window::init(int width, int height, const std::string& title)
 {
+	// data
 	width_ = width;
 	height_ = height;
 	title_ = title;
 
+	// Context init
 	opengl_context_->init(this);
 	imgui_context_->init(this);
 	embree_context_->init(this);
 
-	key_up_ = 0;
-	key_down_ = 0;
-	mouse_wheel_ = 0;
+	std::cout << "All data proccesing sucessfuly" << std::endl;
 
-	is_clicked_X_ = false;
-	is_key_pressed_ = false;
+	// UI init
+	debug_console_ = std::make_unique<ui_render::BJE_Debug>();
 
-	is_left_mouse_clicked_ = false;
-	is_right_mouse_clicked_ = false;
-	is_middle_mouse_clicked_ = false;
+	std::cout << "All ui proccesing sucessfuly" << std::endl;
 
-	mouse_motion_ = glm::vec2(0.0f, 0.0f);
-	mouse_position_ = glm::vec2(0.0f, 0.0f);
 
-	std::cout << "Window initialized" << std::endl;
+
+
+
+
+	std::cout << "Window initialized correctly" << std::endl;
 
 	return is_running_;
 }
 
 BJE_window::~BJE_window()
 {
-	embree_context_->quit_render();
-	imgui_context_->quit_render();
-	opengl_context_->quit_render();
+	
 }
 
 // key callback
@@ -81,7 +85,7 @@ void BJE_window::update(GLFWwindow* window)
 	// input
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
-		glfwSetWindowShouldClose(BJE_window_, true);
+		glfwSetWindowShouldClose(window, true);
 		std::cout << "Escape key pressed" << std::endl;
 	}
 
@@ -172,44 +176,60 @@ void BJE_window::update(GLFWwindow* window)
 	if (glfwWindowShouldClose(window))
 	{
 		is_running_ = false;
+
 	}
 }
 
 // on close
 void BJE_window::close()
 {
+	// move this here to avoid crash on close
+	// the destructor is called after each
+	// BJE_window object is destroyed
+
+	embree_context_->quit_render();
+	imgui_context_->quit_render();
+	opengl_context_->quit_render();
+
+	// Shutdown the renderer
 	is_running_ = false;
 }
+
+
+// render all data here 
 
 // render window
 void BJE_window::render()
 {
+	// get fps
+	int fps = ImGui::GetIO().Framerate;
+	bool close_window = debug_console_->get_close_window();
+
 	opengl_context_->init_render();
 	imgui_context_->init_render();
 	embree_context_->init_render();
 
 	// Draw here
 
-	// Little window
-	ImGui::Begin("Bluejay window");
 
-	ImGui::Text("Hello world!");
 
-	// Button to quit
-	ImGui::Button("Quit");
-	if (ImGui::IsItemClicked())
+	// Debug console
+	debug_console_->render();
+
+	
+
+	if (close_window == true)
 	{
 		is_running_ = false;
 	}
-
-	ImGui::End();
 	
-
-
 
 	// End frame
 	imgui_context_->post_render();
+	embree_context_->post_render();
 	opengl_context_->post_render();
+
+	// update window
 	update(BJE_window_);
 }
 

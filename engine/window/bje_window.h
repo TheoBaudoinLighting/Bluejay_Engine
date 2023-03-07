@@ -10,6 +10,7 @@
 #include "glm.hpp"
 #include "config/bje_window_config.h"
 #include "bje_opengl.h"
+#include "user_interface/bje_debug.h"
 
 
 class BJE_window : public config::BJE_window_config
@@ -47,6 +48,16 @@ public:
 		return is_running_;
 	}
 
+	int get_height() 
+	{
+		return height_;
+	}
+
+	int get_width() 
+	{
+		return width_;
+	}
+
 	void update(GLFWwindow* window);
 
 private:
@@ -55,6 +66,10 @@ private:
 	std::unique_ptr<bje_opengl::BJE_OpenGL> opengl_context_;
 	std::unique_ptr<bje_imgui::BJE_Imgui> imgui_context_;
 	std::unique_ptr<bje_embree::BJE_Embree> embree_context_;
+	
+
+	// UI components
+	std::unique_ptr<ui_render::BJE_Debug> debug_console_;
 
 	bool is_running_;
 	bool is_fullscreen_;

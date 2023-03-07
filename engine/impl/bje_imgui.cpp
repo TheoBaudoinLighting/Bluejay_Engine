@@ -75,7 +75,7 @@ namespace bje_imgui
 			style2.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
 
-		ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(window_->get_window()), true);
+		ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)window_->get_window(), true);
 		ImGui_ImplOpenGL3_Init(glsl_version);
 
 		return true;
@@ -134,8 +134,10 @@ namespace bje_imgui
 
 	void BJE_Imgui::quit_render()
 	{
+		std::cout << "Shutting down Imgui" << std::endl;
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
+		std::cout << "Imgui is out.." << std::endl;
 	}
 }

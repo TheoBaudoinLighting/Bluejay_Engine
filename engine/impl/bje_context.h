@@ -1,7 +1,4 @@
-﻿#pragma once
-
-
-// Config file for the window module
+﻿// Config file for the window module
 #pragma once
 
 #include <string>
@@ -13,7 +10,9 @@ namespace context
 	class BJE_RenderContext
 	{
 	public:
-		BJE_RenderContext() : window_(nullptr) {}
+		BJE_RenderContext() : window_(nullptr)
+		{
+		}
 
 		virtual bool init(config::BJE_window_config* window)
 		{
