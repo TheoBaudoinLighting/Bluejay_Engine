@@ -41,7 +41,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
@@ -78,6 +78,7 @@
     <TargetName>Bluejay_Engine_d</TargetName>
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)out\Bluejay\$(Configuration)</OutDir>
@@ -120,14 +121,15 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;DEBUG;TBB_USE_DEBUG;__SSE__;__SSE2__;EMBREE_SYCL_ALLOC_DISPATCH_GLOBALS;TASKING_TBB;EMBREE_TARGET_SSE2;EMBREE_TARGET_SSE42;EMBREE_TARGET_AVX;EMBREE_TARGET_AVX2;USE_GLFW;__TBB_NO_IMPLICIT_LINKAGE=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\embree\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\embree\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;$(SolutionDir)engine\;$(SolutionDir)engine\core;$(SolutionDir)engine\window;$(SolutionDir)engine\math;$(SolutionDir)engine\impl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/WS_Theo/Documents/embree/tbb/include"</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -148,13 +150,14 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;__SSE__;__SSE2__;EMBREE_SYCL_ALLOC_DISPATCH_GLOBALS;TASKING_TBB;EMBREE_TARGET_SSE2;EMBREE_TARGET_SSE42;EMBREE_TARGET_AVX;EMBREE_TARGET_AVX2;USE_GLFW;__TBB_NO_IMPLICIT_LINKAGE=1;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\embree\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\embree\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;$(SolutionDir)engine\;$(SolutionDir)engine\core;$(SolutionDir)engine\window;$(SolutionDir)engine\math;$(SolutionDir)engine\impl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>MaxSpeed</Optimization>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/WS_Theo/Documents/embree/tbb/include"</AdditionalOptions>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -164,9 +167,14 @@
       <AdditionalLibraryDirectories>$(SolutionDir)engine\external\embree\lib;$(SolutionDir)engine\external\glfw\lib-vc2022;$(SolutionDir)engine\external\tbb\lib\intel64\vc14\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>image.lib;tutorial.lib;noise.lib;scenegraph.lib;embree4.lib;lexers.lib;lights.lib;sys.lib;math.lib;tasking.lib;tbb.lib;imgui.lib;opengl32.lib;glu32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64 /NXCompat /DynamicBase</AdditionalOptions>
+      <TypeLibraryResourceID />
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\impl\bje_embree.cpp" />
+    <ClCompile Include="engine\impl\bje_imgui.cpp" />
+    <ClCompile Include="engine\impl\bje_opengl.cpp" />
+    <ClCompile Include="engine\window\bje_window.cpp" />
     <ClCompile Include="engine\core\bje_main.cpp" />
     <ClCompile Include="engine\external\glad\src\glad.c" />
     <ClCompile Include="engine\external\glm\detail\glm.cpp" />
@@ -179,6 +187,11 @@
     <ClCompile Include="engine\external\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\impl\bje_context.h" />
+    <ClInclude Include="engine\impl\bje_embree.h" />
+    <ClInclude Include="engine\impl\bje_imgui.h" />
+    <ClInclude Include="engine\impl\bje_opengl.h" />
+    <ClInclude Include="engine\window\bje_window.h" />
     <ClInclude Include="engine\external\embree\include\embree4\rtcore.h" />
     <ClInclude Include="engine\external\embree\include\embree4\rtcore_buffer.h" />
     <ClInclude Include="engine\external\embree\include\embree4\rtcore_builder.h" />
@@ -484,8 +497,10 @@
     <ClInclude Include="engine\external\imgui\imstb_rectpack.h" />
     <ClInclude Include="engine\external\imgui\imstb_textedit.h" />
     <ClInclude Include="engine\external\imgui\imstb_truetype.h" />
+    <ClInclude Include="engine\math\bje_color.h" />
     <ClInclude Include="engine\math\bje_ray.h" />
     <ClInclude Include="engine\math\bje_vec3.h" />
+    <ClInclude Include="engine\window\config\bje_window_config.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="engine\external\embree\bin\models\cornell_box.xml.bin" />
