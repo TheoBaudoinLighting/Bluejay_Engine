@@ -992,15 +992,6 @@
     <ClInclude Include="engine\external\glm\vector_relational.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="engine\math\bje_ray.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\math\bje_vec3.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\math\bje_color.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="engine\window\bje_window.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>

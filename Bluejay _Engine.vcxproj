@@ -509,9 +509,6 @@
     <ClInclude Include="engine\external\imgui\imstb_rectpack.h" />
     <ClInclude Include="engine\external\imgui\imstb_textedit.h" />
     <ClInclude Include="engine\external\imgui\imstb_truetype.h" />
-    <ClInclude Include="engine\math\bje_color.h" />
-    <ClInclude Include="engine\math\bje_ray.h" />
-    <ClInclude Include="engine\math\bje_vec3.h" />
     <ClInclude Include="engine\window\config\bje_window_config.h" />
   </ItemGroup>
   <ItemGroup>
