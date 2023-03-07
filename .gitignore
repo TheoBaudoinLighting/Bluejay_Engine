@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+/.vs/Bluejay _Engine
+/out/Bluejay/Debug
+/out/Debug/Bluejay _Engine.tlog
+/out/Debug/vc143.pdb
+/out/Debug/Bluejay_Engine_d.exe.recipe
+/out/Debug/Bluejay_Engine_d.Build.CppClean.log
+/out/Debug/Bluejay _Engine.log
+/imgui.ini
+/Bluejay _Engine.vcxproj.user
