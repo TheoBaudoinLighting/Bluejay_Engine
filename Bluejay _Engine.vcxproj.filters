@@ -1028,6 +1028,927 @@
     <ClInclude Include="engine\bvh\bje_aarect.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Cholesky\LDLT.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Cholesky\LLT.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Cholesky\LLT_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\CholmodSupport\CholmodSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AltiVec\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AltiVec\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AltiVec\MatrixProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AltiVec\MatrixProductCommon.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AltiVec\MatrixProductMMA.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AltiVec\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX512\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX512\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX512\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\AVX512\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\CUDA\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\Default\BFloat16.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\Default\ConjHelper.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\Default\GenericPacketMathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\Default\GenericPacketMathFunctionsFwd.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\Default\Half.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\Default\Settings.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\Default\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\GPU\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\GPU\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\GPU\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\HIP\hcc\math_constants.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\MSA\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\MSA\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\MSA\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\NEON\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\NEON\GeneralBlockPanelKernel.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\NEON\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\NEON\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\NEON\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SSE\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SSE\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SSE\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SSE\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SVE\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SVE\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SVE\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SYCL\InteropHeaders.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SYCL\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SYCL\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SYCL\SyclMemoryModel.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\SYCL\TypeCasting.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\ZVector\Complex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\ZVector\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\arch\ZVector\PacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\functors\AssignmentFunctors.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\functors\BinaryFunctors.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\functors\NullaryFunctors.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\functors\StlFunctors.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\functors\TernaryFunctors.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\functors\UnaryFunctors.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\GeneralBlockPanelKernel.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\GeneralMatrixMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\GeneralMatrixMatrix_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\GeneralMatrixMatrixTriangular.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\GeneralMatrixMatrixTriangular_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\GeneralMatrixVector.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\GeneralMatrixVector_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\Parallelizer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\SelfadjointMatrixMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\SelfadjointMatrixMatrix_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\SelfadjointMatrixVector.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\SelfadjointMatrixVector_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\SelfadjointProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\SelfadjointRank2Update.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\TriangularMatrixMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\TriangularMatrixMatrix_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\TriangularMatrixVector.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\TriangularMatrixVector_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\TriangularSolverMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\TriangularSolverMatrix_BLAS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\products\TriangularSolverVector.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\BlasUtil.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\ConfigureVectorization.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\Constants.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\DisableStupidWarnings.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\ForwardDeclarations.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\IndexedViewHelper.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\IntegralConstant.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\Macros.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\Memory.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\Meta.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\MKL_support.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\NonMPL2.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\ReenableStupidWarnings.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\ReshapedHelper.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\StaticAssert.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\SymbolicIndex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\util\XprHelper.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\ArithmeticSequence.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Array.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\ArrayBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\ArrayWrapper.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Assign.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Assign_MKL.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\AssignEvaluator.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\BandMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Block.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\BooleanRedux.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CommaInitializer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\ConditionEstimator.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CoreEvaluators.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CoreIterators.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CwiseBinaryOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CwiseNullaryOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CwiseTernaryOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CwiseUnaryOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\CwiseUnaryView.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\DenseBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\DenseCoeffsBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\DenseStorage.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Diagonal.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\DiagonalMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\DiagonalProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Dot.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\EigenBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\ForceAlignedAccess.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Fuzzy.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\GeneralProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\GenericPacketMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\GlobalFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\IndexedView.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Inverse.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\IO.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Map.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\MapBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\MathFunctions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\MathFunctionsImpl.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Matrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\MatrixBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\NestByValue.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\NoAlias.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\NumTraits.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\PartialReduxEvaluator.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\PermutationMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\PlainObjectBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Product.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\ProductEvaluators.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Random.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Redux.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Ref.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Replicate.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Reshaped.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\ReturnByValue.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Reverse.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Select.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\SelfAdjointView.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\SelfCwiseBinaryOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Solve.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\SolverBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\SolveTriangular.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\StableNorm.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\StlIterators.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Stride.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Swap.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Transpose.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Transpositions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\TriangularMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\VectorBlock.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\VectorwiseOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Core\Visitor.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\ComplexEigenSolver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\ComplexSchur.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\ComplexSchur_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\EigenSolver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\GeneralizedEigenSolver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\GeneralizedSelfAdjointEigenSolver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\HessenbergDecomposition.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\MatrixBaseEigenvalues.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\RealQZ.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\RealSchur.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\RealSchur_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\SelfAdjointEigenSolver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\SelfAdjointEigenSolver_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Eigenvalues\Tridiagonalization.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\arch\Geometry_SIMD.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\AlignedBox.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\AngleAxis.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\EulerAngles.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Homogeneous.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Hyperplane.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\OrthoMethods.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\ParametrizedLine.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Quaternion.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Rotation2D.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\RotationBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Scaling.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Transform.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Translation.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Geometry\Umeyama.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Householder\BlockHouseholder.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Householder\Householder.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Householder\HouseholderSequence.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\BasicPreconditioners.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\BiCGSTAB.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\ConjugateGradient.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\IncompleteCholesky.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\IncompleteLUT.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\IterativeSolverBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\LeastSquareConjugateGradient.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\IterativeLinearSolvers\SolveWithGuess.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\Jacobi\Jacobi.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\KLUSupport\KLUSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\LU\arch\InverseSize4.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\LU\Determinant.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\LU\FullPivLU.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\LU\InverseImpl.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\LU\PartialPivLU.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\LU\PartialPivLU_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\MetisSupport\MetisSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\misc\blas.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\misc\Image.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\misc\Kernel.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\misc\lapack.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\misc\lapacke.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\misc\lapacke_mangling.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\misc\RealSvd2x2.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\OrderingMethods\Amd.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\OrderingMethods\Eigen_Colamd.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\OrderingMethods\Ordering.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\PardisoSupport\PardisoSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\PaStiXSupport\PaStiXSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\ArrayCwiseBinaryOps.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\ArrayCwiseUnaryOps.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\BlockMethods.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\CommonCwiseBinaryOps.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\CommonCwiseUnaryOps.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\IndexedViewMethods.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\MatrixCwiseBinaryOps.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\MatrixCwiseUnaryOps.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\plugins\ReshapedMethods.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\QR\ColPivHouseholderQR.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\QR\ColPivHouseholderQR_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\QR\CompleteOrthogonalDecomposition.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\QR\FullPivHouseholderQR.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\QR\HouseholderQR.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\QR\HouseholderQR_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCholesky\SimplicialCholesky.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCholesky\SimplicialCholesky_impl.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\AmbiVector.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\CompressedStorage.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\ConservativeSparseSparseProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\MappedSparseMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseAssign.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseBlock.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseColEtree.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseCompressedBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseCwiseBinaryOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseCwiseUnaryOp.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseDenseProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseDiagonalProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseDot.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseFuzzy.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseMap.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseMatrixBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparsePermutation.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseProduct.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseRedux.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseRef.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseSelfAdjointView.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseSolverBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseSparseProductWithPruning.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseTranspose.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseTriangularView.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseUtil.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseVector.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\SparseView.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseCore\TriangularSolver.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_column_bmod.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_column_dfs.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_copy_to_ucol.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_gemm_kernel.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_heap_relax_snode.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_kernel_bmod.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_Memory.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_panel_bmod.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_panel_dfs.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_pivotL.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_pruneL.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_relax_snode.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_Structs.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_SupernodalMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLU_Utils.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseLU\SparseLUImpl.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SparseQR\SparseQR.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SPQRSupport\SuiteSparseQRSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\StlSupport\details.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\StlSupport\StdDeque.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\StlSupport\StdList.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\StlSupport\StdVector.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SuperLUSupport\SuperLUSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SVD\BDCSVD.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SVD\JacobiSVD.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SVD\JacobiSVD_LAPACKE.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SVD\SVDBase.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\SVD\UpperBidiagonalization.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\eigen\Eigen\src\UmfPackSupport\UmfPackSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="engine\external\embree\bin\models\cornell_box.xml.bin">

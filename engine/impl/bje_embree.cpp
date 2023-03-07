@@ -39,6 +39,9 @@ namespace bje_embree
 		embree_device_ = rtcNewDevice("verbose=1");
 		embree_scene_  = rtcNewScene(embree_device_);
 
+		if (!embree_device_)
+			printf("Error %d: cannot create device\n", rtcGetDeviceError(nullptr));
+
 		// Show Embree version
 		rtcReleaseDevice(embree_device_);
 
