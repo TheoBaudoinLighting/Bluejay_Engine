@@ -29,8 +29,6 @@ bool BJE_window::init(int width, int height, const std::string& title)
 	// UI init
 	debug_console_ = std::make_unique<ui_render::BJE_Debug>();
 
-	std::cout << "All ui proccesing sucessfuly" << std::endl;
-
 
 
 
@@ -210,6 +208,22 @@ void BJE_window::render()
 	embree_context_->init_render();
 
 	// Draw here
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

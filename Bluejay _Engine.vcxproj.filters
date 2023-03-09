@@ -51,7 +51,7 @@
     <ClCompile Include="engine\impl\bje_opengl.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="engine\impl\bje_embree.cpp">
+    <ClCompile Include="engine\impl\bje_radeon.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="engine\impl\bje_imgui.cpp">
@@ -73,6 +73,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="engine\bvh\bje_aarect.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\external\RadeonProRender\common\common.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -998,7 +1001,7 @@
     <ClInclude Include="engine\impl\bje_opengl.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="engine\impl\bje_embree.h">
+    <ClInclude Include="engine\impl\bje_radeon.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="engine\impl\bje_imgui.h">
@@ -1947,6 +1950,18 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="engine\external\eigen\Eigen\src\UmfPackSupport\UmfPackSupport.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\math\bje_color.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\common\common.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\common\picojson.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\common\tiny_obj_loader.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

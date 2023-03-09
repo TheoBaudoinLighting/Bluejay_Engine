@@ -10,7 +10,10 @@
 
 #include <BJE_OpenGL.h>
 
-#include <embree4/rtcore.h>
+#include "RadeonProRender.h"
+#include "RadeonProRender_GL.h"
+
+#include "common.h"
 #include <glm.hpp>
 
 #include "bje_window.h"

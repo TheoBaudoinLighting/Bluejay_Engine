@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -118,10 +118,10 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>
       </SDLCheck>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;DEBUG;TBB_USE_DEBUG;__SSE__;__SSE2__;EMBREE_SYCL_ALLOC_DISPATCH_GLOBALS;TASKING_TBB;EMBREE_TARGET_SSE2;EMBREE_TARGET_SSE42;EMBREE_TARGET_AVX;EMBREE_TARGET_AVX2;USE_GLFW;__TBB_NO_IMPLICIT_LINKAGE=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;DEBUG;TBB_USE_DEBUG;__SSE__;__SSE2__;RPR_API_USE_HEADER_V2;USE_GLFW;__TBB_NO_IMPLICIT_LINKAGE=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\embree\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;$(SolutionDir)engine\;$(SolutionDir)engine\core;$(SolutionDir)engine\window;$(SolutionDir)engine\math;$(SolutionDir)engine\impl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\RadeonProRender\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;$(SolutionDir)engine\;$(SolutionDir)engine\core;$(SolutionDir)engine\window;$(SolutionDir)engine\math;$(SolutionDir)engine\impl;$(SolutionDir)engine\external\RadeonProRender\inc;$(SolutionDir)engine\external\RadeonProRender\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
@@ -135,8 +135,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)engine\external\embree\lib;$(SolutionDir)engine\external\glfw\lib-vc2022;$(SolutionDir)engine\external\tbb\lib\intel64\vc14\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>image.lib;tutorial.lib;noise.lib;scenegraph.lib;embree4.lib;lexers.lib;lights.lib;sys.lib;math.lib;tasking.lib;tbb.lib;imgui.lib;opengl32.lib;glu32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)engine\external\RadeonProRender\libWin64;$(SolutionDir)engine\external\glfw\lib-vc2022;$(SolutionDir)engine\external\tbb\lib\intel64\vc14\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>RadeonProRender64.lib;opengl32.lib;glu32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64 /NXCompat /DynamicBase</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -175,9 +175,10 @@
     <ClCompile Include="engine\bvh\bje_aarect.cpp" />
     <ClCompile Include="engine\bvh\bje_bvh.cpp" />
     <ClCompile Include="engine\bvh\bje_onb.cpp" />
+    <ClCompile Include="engine\external\RadeonProRender\common\common.cpp" />
     <ClCompile Include="engine\user_interface\bje_debug.cpp" />
     <ClCompile Include="engine\user_interface\bje_log_console.cpp" />
-    <ClCompile Include="engine\impl\bje_embree.cpp" />
+    <ClCompile Include="engine\impl\bje_radeon.cpp" />
     <ClCompile Include="engine\impl\bje_imgui.cpp" />
     <ClCompile Include="engine\impl\bje_opengl.cpp" />
     <ClCompile Include="engine\window\bje_window.cpp" />
@@ -504,10 +505,14 @@
     <ClInclude Include="engine\external\eigen\Eigen\src\SVD\SVDBase.h" />
     <ClInclude Include="engine\external\eigen\Eigen\src\SVD\UpperBidiagonalization.h" />
     <ClInclude Include="engine\external\eigen\Eigen\src\UmfPackSupport\UmfPackSupport.h" />
+    <ClInclude Include="engine\external\RadeonProRender\common\common.h" />
+    <ClInclude Include="engine\external\RadeonProRender\common\picojson.h" />
+    <ClInclude Include="engine\external\RadeonProRender\common\tiny_obj_loader.h" />
+    <ClInclude Include="engine\math\bje_color.h" />
     <ClInclude Include="engine\user_interface\bje_debug.h" />
     <ClInclude Include="engine\user_interface\bje_log_console.h" />
     <ClInclude Include="engine\impl\bje_context.h" />
-    <ClInclude Include="engine\impl\bje_embree.h" />
+    <ClInclude Include="engine\impl\bje_radeon.h" />
     <ClInclude Include="engine\impl\bje_imgui.h" />
     <ClInclude Include="engine\impl\bje_opengl.h" />
     <ClInclude Include="engine\window\bje_window.h" />

@@ -4,7 +4,7 @@
 #include <memory>
 
 
-#include "bje_embree.h"
+#include "BJE_Radeon.h"
 #include "bje_imgui.h"
 #include "GLFW/glfw3.h"
 #include "glm.hpp"
@@ -24,7 +24,7 @@ public:
 	{
 		opengl_context_ = std::make_unique<bje_opengl::BJE_OpenGL>();
 		imgui_context_ = std::make_unique<bje_imgui::BJE_Imgui>();
-		embree_context_ = std::make_unique<bje_embree::BJE_Embree>();
+		embree_context_ = std::make_unique<bje_radeon::BJE_Radeon>();
 	}
 
 	~BJE_window();
@@ -65,7 +65,7 @@ private:
 
 	std::unique_ptr<bje_opengl::BJE_OpenGL> opengl_context_;
 	std::unique_ptr<bje_imgui::BJE_Imgui> imgui_context_;
-	std::unique_ptr<bje_embree::BJE_Embree> embree_context_;
+	std::unique_ptr<bje_radeon::BJE_Radeon> embree_context_;
 	
 
 	// UI components
