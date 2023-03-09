@@ -22,7 +22,7 @@ bool BJE_window::init(int width, int height, const std::string& title)
 	// Context init
 	opengl_context_->init(this);
 	imgui_context_->init(this);
-	embree_context_->init(this);
+	radeon_context_->init(this);
 
 	std::cout << "All data proccesing sucessfuly" << std::endl;
 
@@ -75,6 +75,18 @@ void BJE_window::resize(int width, int height)
 	height_ = height;
 
 	render();
+}
+
+BJE_window* BJE_window::from_native_window(GLFWwindow* window)
+{
+	// Créer une instance de la classe "BJE_window"
+	BJE_window* bje_window = new BJE_window();
+
+	// Stocker le pointeur de la fenêtre native GLFW dans l'instance de la classe "BJE_window"
+	bje_window->set_native_window(window);
+
+	// Retourner l'instance de la classe "BJE_window"
+	return bje_window;
 }
 
 // update
@@ -185,7 +197,7 @@ void BJE_window::close()
 	// the destructor is called after each
 	// BJE_window object is destroyed
 
-	embree_context_->quit_render();
+	radeon_context_->quit_render();
 	imgui_context_->quit_render();
 	opengl_context_->quit_render();
 
@@ -205,19 +217,45 @@ void BJE_window::render()
 
 	opengl_context_->init_render();
 	imgui_context_->init_render();
-	embree_context_->init_render();
+	radeon_context_->init_render();
 
 	// Draw here
 
-
 	
+	radeon_context_->render();
 
 
 
+	// Créer une texture OpenGL pour stocker le rendu de Radeon ProRender
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
+	// Créer un framebuffer Radeon ProRender lié à la texture OpenGL
+	rpr_framebuffer_desc desc = { width, height };
+	desc.format = RPR_FRAMEBUFFER_FORMAT_FLOAT4;
+	desc.depth = 1;
+	rpr_framebuffer frame_buffer;
+	rprContextCreateFrameBuffer(g_rpr_context, desc, &frame_buffer);
+	rprContextSetAOV(g_rpr_context, RPR_AOV_COLOR, frame_buffer);
 
+	// Effectuer le rendu de la scène à l'aide de Radeon ProRender
+	rprContextRender(g_rpr_context);
+	rprFrameBufferGetInfo(frame_buffer, RPR_FRAMEBUFFER_DATA_FLOAT4, g_fbdata.get(), &size);
 
-
+	// Lier la texture OpenGL et afficher le rendu dans la fenêtre GLFW
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, g_fbdata.get());
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex2f(-1, -1);
+	glTexCoord2f(1, 0); glVertex2f(1, -1);
+	glTexCoord2f(1, 1); glVertex2f(1, 1);
+	glTexCoord2f(0, 1); glVertex2f(-1, 1);
+	glEnd();
 
 
 
@@ -240,7 +278,7 @@ void BJE_window::render()
 
 	// End frame
 	imgui_context_->post_render();
-	embree_context_->post_render();
+	radeon_context_->post_render();
 	opengl_context_->post_render();
 
 	// update window

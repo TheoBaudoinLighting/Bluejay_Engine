@@ -6,6 +6,7 @@
 #include "bje_opengl.h"
 
 #include <iostream>
+#include <RadeonProRender_v2.h>
 
 #include "GLFW/glfw3.h"
 
@@ -53,8 +54,9 @@ namespace bje_opengl
 		// Enable depth testing
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+		glCullFace(GL_NONE);
 
 		glfwSwapInterval(1); // Enable vsync
 

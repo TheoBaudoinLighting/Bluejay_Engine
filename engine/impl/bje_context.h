@@ -1,6 +1,7 @@
 ﻿// Config file for the window module
 #pragma once
 
+#include <RadeonProRender_v2.h>
 #include <string>
 
 #include "config/bje_window_config.h"

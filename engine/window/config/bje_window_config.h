@@ -21,8 +21,8 @@ namespace config
 
 		// Getters
 
-		int width_;
-		int height_;
+		int width_ = 1280;
+		int height_ = 800;
 		std::string title_;
 	};
 }

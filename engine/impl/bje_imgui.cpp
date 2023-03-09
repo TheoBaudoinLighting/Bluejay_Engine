@@ -1,6 +1,7 @@
 #include "bje_imgui.h"
 
 #include <iostream>
+#include <RadeonProRender_v2.h>
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -113,6 +114,8 @@ namespace bje_imgui
 
 		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
 		ImGui::End();
+
+
 	}
 
 	void BJE_Imgui::post_render()

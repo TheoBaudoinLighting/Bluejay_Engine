@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\shader\bje_shader.cpp" />
     <ClCompile Include="engine\bvh\bje_aabb.cpp" />
     <ClCompile Include="engine\bvh\bje_aarect.cpp" />
     <ClCompile Include="engine\bvh\bje_bvh.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="engine\external\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\shader\bje_shader.h" />
     <ClInclude Include="engine\bvh\bje_aabb.h" />
     <ClInclude Include="engine\bvh\bje_aarect.h" />
     <ClInclude Include="engine\bvh\bje_bvh.h" />

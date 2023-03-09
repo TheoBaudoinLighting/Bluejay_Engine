@@ -11,6 +11,7 @@
 
 #include "common.h"
 
+
 #include "Math/mathutils.h"
 
 
@@ -372,10 +373,10 @@ MatballScene::MATBALL MatballScene::Init(rpr_context context, int shapeShiftX, i
 
 	MatballScene::MATBALL newShape = AddMatball(shapeShiftX, shapeShiftY, false);
 
-	m_shape_floor = ImportOBJ("../../Resources/Meshes/matball_floor.obj",m_scene,m_context);
+	m_shape_floor = ImportOBJ("Meshes/matball_floor.obj",m_scene,m_context);
 
 
-	CHECK( rprContextCreateImageFromFile(m_context,"../../Resources/Textures/envLightImage.exr",&m_IBLimage) );
+	CHECK( rprContextCreateImageFromFile(m_context,"Textures/envLightImage.exr",&m_IBLimage) );
 	CHECK( rprObjectSetName (m_IBLimage,"IBLimage") );
 
 
@@ -388,7 +389,7 @@ MatballScene::MATBALL MatballScene::Init(rpr_context context, int shapeShiftX, i
 	CHECK( rprSceneSetEnvironmentLight(m_scene,m_light) );
 	
 
-	CHECK( rprContextCreateImageFromFile(m_context,"../../Resources/Textures/amd.png",&m_floorImage) );
+	CHECK( rprContextCreateImageFromFile(m_context,"Textures/amd.png",&m_floorImage) );
 	CHECK( rprObjectSetName (m_floorImage,"floorImage") );
 
 	CHECK( rprMaterialSystemCreateNode(m_matsys,RPR_MATERIAL_NODE_IMAGE_TEXTURE,&m_floorImageMaterial) );
@@ -460,9 +461,9 @@ MatballScene::MATBALL MatballScene::AddMatball(int shiftX, int shiftY, bool crea
 	}
 	else
 	{
-		newShape.base = ImportOBJ("../../Resources/Meshes/matball_base.obj",m_scene,m_context);
-		newShape.inner = ImportOBJ("../../Resources/Meshes/matball_inner.obj",m_scene,m_context);
-		newShape.outer = ImportOBJ("../../Resources/Meshes/matball_outer.obj",m_scene,m_context);
+		newShape.base = ImportOBJ("Meshes/matball_base.obj",m_scene,m_context);
+		newShape.inner = ImportOBJ("Meshes/matball_inner.obj",m_scene,m_context);
+		newShape.outer = ImportOBJ("Meshes/matball_outer.obj",m_scene,m_context);
 	}
 
 	RadeonProRender::matrix mB = RadeonProRender::translation(shapeListPos);
@@ -507,7 +508,7 @@ rpr_status CreateAMDFloor(rpr_context context, rpr_scene scene, rpr_material_sys
 	{
 
 
-		const std::string pathImageFileA = "../../Resources/Textures/amd.png";
+		const std::string pathImageFileA = "Textures/amd.png";
 		rpr_status status = rprContextCreateImageFromFile(context, pathImageFileA.c_str(), &image2);
 		gc.GCAdd(image2);
 		if (status == RPR_ERROR_IO_ERROR)
@@ -549,7 +550,7 @@ rpr_status CreateNatureEnvLight(rpr_context context, rpr_scene scene, RPRGarbage
 	CHECK(rprContextCreateEnvironmentLight(context, &lightEnv));
 	gc.GCAdd(lightEnv);
 
-	const std::string pathImageFile = "../../Resources/Textures/turning_area_4k.hdr";
+	const std::string pathImageFile = "Textures/turning_area_4k.hdr";
 
 	rpr_image imgEnvLight = nullptr;
 	rpr_status status = rprContextCreateImageFromFile(context, pathImageFile.c_str(), &imgEnvLight); // import image use by the Env light
@@ -562,9 +563,9 @@ rpr_status CreateNatureEnvLight(rpr_context context, rpr_scene scene, RPRGarbage
 	gc.GCAdd(imgEnvLight);
 
 	CHECK(rprEnvironmentLightSetImage(lightEnv, imgEnvLight));
-	CHECK(rprEnvironmentLightSetIntensityScale(lightEnv, power)); 
+	CHECK(rprEnvironmentLightSetIntensityScale(lightEnv, power));
 	CHECK(rprSceneAttachLight(scene, lightEnv));
-	
+
 	return RPR_SUCCESS;
 }
 
