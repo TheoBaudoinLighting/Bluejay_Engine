@@ -34,16 +34,16 @@ namespace bje_radeon
 		bool get_context();
 		bool get_scene();
 
-		/*GLuint get_vertex_buffer() { return vertex_buffer_id_; }
-		GLuint get_index_buffer() { return index_buffer_id_; }
-		GLuint get_texture() { return texture_; }
-		rpr_framebuffer get_frame_buffer() { return frame_buffer_; }
-		rpr_framebuffer get_frame_buffer_2() { return frame_buffer_2_; }
-		rpr_material_system get_material() { return matsys_; }
+		//GLuint get_vertex_buffer() { return vertex_buffer_id_; }
+		//GLuint get_index_buffer() { return index_buffer_id_; }
+		//GLuint get_texture() { return texture_; }
+		//rpr_framebuffer get_frame_buffer() { return frame_buffer_; }
+		//rpr_framebuffer get_frame_buffer_2() { return frame_buffer_2_; }
+		//rpr_material_system get_material() { return matsys_; }
 		rpr_camera get_camera() { return camera_; }
-		RPRGarbageCollector get_garbage_collector() { return garbage_collector_; }
-		std::shared_ptr<float> get_fbdata() { return fbdata_; }
-		bool get_ask_exit() { return ask_exit_; }*/
+		//RPRGarbageCollector get_garbage_collector() { return garbage_collector_; }
+		//std::shared_ptr<float> get_fbdata() { return fbdata_; }
+		//bool get_ask_exit() { return ask_exit_; }
 
 	private:
 
@@ -67,7 +67,7 @@ namespace bje_radeon
 		GLuint              texture_ = 0;
 		rpr_framebuffer		frame_buffer_ = NULL;
 		rpr_framebuffer     frame_buffer_2_ = NULL;
-		rpr_material_system matsys_ = NULL;
+		rpr_material_system matsys_;
 		BJE_Shader          shader_manager_;
 		rpr_scene			scene_ = nullptr;
 		rpr_camera			camera_ = nullptr;

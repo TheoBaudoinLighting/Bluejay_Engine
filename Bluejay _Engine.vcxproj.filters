@@ -75,10 +75,13 @@
     <ClCompile Include="engine\bvh\bje_aarect.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="engine\external\RadeonProRender\common\common.cpp">
+    <ClCompile Include="engine\shader\bje_shader.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="engine\shader\bje_shader.cpp">
+    <ClCompile Include="engine\external\RadeonProRender\inc\Math\half.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\external\RadeonProRender\common\common.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1958,6 +1961,78 @@
     <ClInclude Include="engine\math\bje_color.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="engine\shader\bje_shader.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\eLut.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\float2.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\float3.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\float4.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\half.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\int2.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\int3.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\mathutils.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\matrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\quaternion.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\toFloat.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\ProRenderGLTF.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_Baikal.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_CL.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_D3D12.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_GL.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_MaterialX.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_Metal.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_v2.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_VK.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\rprDeprecatedApi.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\external\RadeonProRender\inc\RprLoadStore.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="engine\external\RadeonProRender\common\common.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -1965,9 +2040,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="engine\external\RadeonProRender\common\tiny_obj_loader.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\shader\bje_shader.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

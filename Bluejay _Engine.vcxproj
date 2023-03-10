@@ -136,7 +136,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)engine\external\RadeonProRender\libWin64;$(SolutionDir)engine\external\glfw\lib-vc2022;$(SolutionDir)engine\external\tbb\lib\intel64\vc14\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RadeonProRender64.lib;opengl32.lib;glu32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>RadeonProRender64.lib;RprLoadStore64.lib;opengl32.lib;glu32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64 /NXCompat /DynamicBase</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -171,12 +171,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\external\RadeonProRender\common\common.cpp" />
+    <ClCompile Include="engine\external\RadeonProRender\inc\Math\half.cpp" />
     <ClCompile Include="engine\shader\bje_shader.cpp" />
     <ClCompile Include="engine\bvh\bje_aabb.cpp" />
     <ClCompile Include="engine\bvh\bje_aarect.cpp" />
     <ClCompile Include="engine\bvh\bje_bvh.cpp" />
     <ClCompile Include="engine\bvh\bje_onb.cpp" />
-    <ClCompile Include="engine\external\RadeonProRender\common\common.cpp" />
     <ClCompile Include="engine\user_interface\bje_debug.cpp" />
     <ClCompile Include="engine\user_interface\bje_log_console.cpp" />
     <ClCompile Include="engine\impl\bje_radeon.cpp" />
@@ -195,6 +196,32 @@
     <ClCompile Include="engine\external\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\external\RadeonProRender\common\common.h" />
+    <ClInclude Include="engine\external\RadeonProRender\common\picojson.h" />
+    <ClInclude Include="engine\external\RadeonProRender\common\tiny_obj_loader.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\eLut.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\float2.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\float3.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\float4.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\half.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\int2.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\int3.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\mathutils.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\matrix.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\quaternion.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\Math\toFloat.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\ProRenderGLTF.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_Baikal.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_CL.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_D3D12.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_GL.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_MaterialX.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_Metal.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_v2.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RadeonProRender_VK.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\rprDeprecatedApi.h" />
+    <ClInclude Include="engine\external\RadeonProRender\inc\RprLoadStore.h" />
     <ClInclude Include="engine\shader\bje_shader.h" />
     <ClInclude Include="engine\bvh\bje_aabb.h" />
     <ClInclude Include="engine\bvh\bje_aarect.h" />
@@ -507,9 +534,6 @@
     <ClInclude Include="engine\external\eigen\Eigen\src\SVD\SVDBase.h" />
     <ClInclude Include="engine\external\eigen\Eigen\src\SVD\UpperBidiagonalization.h" />
     <ClInclude Include="engine\external\eigen\Eigen\src\UmfPackSupport\UmfPackSupport.h" />
-    <ClInclude Include="engine\external\RadeonProRender\common\common.h" />
-    <ClInclude Include="engine\external\RadeonProRender\common\picojson.h" />
-    <ClInclude Include="engine\external\RadeonProRender\common\tiny_obj_loader.h" />
     <ClInclude Include="engine\math\bje_color.h" />
     <ClInclude Include="engine\user_interface\bje_debug.h" />
     <ClInclude Include="engine\user_interface\bje_log_console.h" />

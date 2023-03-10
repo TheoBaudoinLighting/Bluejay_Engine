@@ -68,13 +68,15 @@ namespace bje_radeon
 
 		bool leftMouseButtonDown;
 	};
-	MOUSE_DRAG_INFO g_mouse_camera;
+	MOUSE_DRAG_INFO mouse_camera_;
 
-	void errorFunction(void* userPtr, enum RTCError error, const char* str)
+	void error_function(void* userPtr, enum RTCError error, const char* str)
 	{
 		printf("error %d: %s\n", error, str);
 	}
+
 	
+
 	bool BJE_Radeon::init(int width, int height, config::BJE_window_config* window)
 	{
 		// Enumerate each step of the initialization process
@@ -176,44 +178,36 @@ namespace bje_radeon
 		rpr_int status = RPR_SUCCESS;
 		std::cout << "RPR_API_VERSION : " << RPR_API_VERSION << std::endl;
 
-		// Enumerate each step
-		
+
 		rpr_int pluginID = rprRegisterPlugin(RPR_PLUGIN_FILE_NAME);
 		CHECK_NE(pluginID, -1);
-		std::cout << "012 Rpr plugin successfully registered.." << std::endl;
 
 		rpr_int plugins[] = { pluginID };
 		size_t numPlugins = sizeof(plugins) / sizeof(plugins[0]);
 		std::cout << "Number of plugins : " << numPlugins << std::endl;
-		std::cout << "013 Rpr plugin successfully registered.." << std::endl;
-		
+
+		// Create Radeon ProRender context
 		status = rprCreateContext(RPR_API_VERSION, plugins, numPlugins, RPR_CREATION_FLAGS_ENABLE_GPU0, context_properties, nullptr, &rpr_context_);
 		CHECK(status);
-		std::cout << "Rpr context successfully created.." << std::endl;
-		std::cout << "014 Rpr context successfully created.." << std::endl;
+
+		
+
 		
 		CHECK(rprContextSetActivePlugin(rpr_context_, plugins[0]));
 		std::cout << "Rpr context successfully set active plugin.." << std::endl;
-		std::cout << "015 Rpr context successfully set active plugin.." << std::endl;
 		
 		CHECK(rprContextCreateMaterialSystem(rpr_context_, 0, &matsys_));
-		std::cout << "Rpr context successfully set material system.." << std::endl;
-		std::cout << "016 Rpr context successfully set material system.." << std::endl;
 
 		char deviceName_gpu0[1024]; deviceName_gpu0[0] = 0;
 		CHECK(rprContextGetInfo(rpr_context_, RPR_CONTEXT_GPU0_NAME, sizeof(deviceName_gpu0), deviceName_gpu0, 0));
-		std::cout << "GPU0 name : " << std::string(deviceName_gpu0) << std::endl;
-		std::cout << "017 GPU0 name : " << std::string(deviceName_gpu0) << std::endl;
 
 		std::cout << "Rpr context successfully created.." << std::endl;
 		
 		std::cout << "Creating Radeon scene.." << std::endl;
 
 		CHECK(rprContextCreateScene(rpr_context_, &scene_));
-		std::cout << "018 Radeon scene successfully created.." << std::endl;
 		
 		CHECK(CreateNatureEnvLight(rpr_context_, scene_, garbage_collector_, 0.9f));
-		std::cout << "019 Radeon environment light successfully created.." << std::endl;
 		
 		{
 			CHECK(rprContextCreateCamera(rpr_context_, &camera_));
@@ -226,7 +220,6 @@ namespace bje_radeon
 		}
 
 		CHECK(rprContextSetScene(rpr_context_, scene_));
-		std::cout << "020 Radeon scene successfully set.." << std::endl;
 
 		rpr_shape mesh = nullptr;
 		{
@@ -236,10 +229,9 @@ namespace bje_radeon
 			RadeonProRender::matrix m = RadeonProRender::rotation_x(MY_PI);
 			CHECK(rprShapeSetTransform(mesh, RPR_TRUE, &m.m00));
 		}
-		std::cout << "021 Radeon mesh successfully created.." << std::endl;
+		
 		
 		CHECK(CreateAMDFloor(rpr_context_, scene_, matsys_, garbage_collector_, 1.f, 1.f));
-		std::cout << "022 Radeon floor successfully created.." << std::endl;
 		
 		{
 			rpr_image uber_image1 = nullptr;
@@ -249,6 +241,9 @@ namespace bje_radeon
 			rpr_image uber_image2 = nullptr;
 			CHECK(rprContextCreateImageFromFile(rpr_context_, "Textures/lead_rusted_Normal.jpg", &uber_image2));
 			garbage_collector_.GCAdd(uber_image2);
+
+
+			// CPU model of the material
 
 			rpr_material_node uberMat2_imgTexture1 = nullptr;
 			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_IMAGE_TEXTURE, &uberMat2_imgTexture1));
@@ -277,7 +272,7 @@ namespace bje_radeon
 			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_NORMAL, matNormalMap));
 			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_WEIGHT, 1, 1, 1, 1));
 
-			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_COLOR, uberMat2_imgTexture2));
+			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_COLOR, uberMat2_imgTexture1));
 			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_NORMAL, matNormalMap));
 			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_WEIGHT, 1, 1, 1, 1));
 			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_ROUGHNESS, 0, 0, 0, 0));
@@ -288,12 +283,15 @@ namespace bje_radeon
 			
 			CHECK(rprShapeSetMaterial(mesh, uberMat2));
 		}
+		
+		//int iteration_count = 100;
 
-		std::cout << "023 Radeon material successfully created.." << std::endl;
+		//// if using Hybrid ( not HybridPro ) then disable iteration count
+		//if (hybrid_plugin_name.find("Hybrid.") != std::string::npos)
+		//	iteration_count = -1;
 
 
 		CHECK(rprContextSetParameterByKey1f(rpr_context_, RPR_CONTEXT_DISPLAY_GAMMA, 2.2f)); // gamma correction
-		std::cout << "024 Radeon gamma correction successfully set.." << std::endl;
 
 		const unsigned int WIN_WIDTH = width_;
 		const unsigned int WIN_HEIGHT = height_;
@@ -368,7 +366,6 @@ namespace bje_radeon
 	{
 
 	}
-
 
 	void BJE_Radeon::render_phase_01()
 	{

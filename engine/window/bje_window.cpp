@@ -8,9 +8,29 @@
 #include "imgui.h"
 
 // ui
+#include "Math/mathutils.h"
 #include "user_interface/bje_debug.h"
 
+struct MOUSE_DRAG_INFO
+{
+	MOUSE_DRAG_INFO()
+	{
+		leftMouseButtonDown = false;
+		mousePosAtMouseButtonDown_X = -1;
+		mousePosAtMouseButtonDown_Y = -1;
+	}
 
+	RadeonProRender::float3 lookat;
+	RadeonProRender::float3 up;
+	RadeonProRender::float3 pos;
+	RadeonProRender::matrix mat;
+
+	int	mousePosAtMouseButtonDown_X;
+	int	mousePosAtMouseButtonDown_Y;
+
+	bool leftMouseButtonDown;
+};
+MOUSE_DRAG_INFO mouse_camera_;
 
 bool BJE_window::init(int width, int height, const std::string& title)
 {
@@ -88,6 +108,8 @@ BJE_window* BJE_window::from_native_window(GLFWwindow* window)
 	return bje_window;
 }
 
+
+
 // update
 void BJE_window::update(GLFWwindow* window)
 {
@@ -160,8 +182,25 @@ void BJE_window::update(GLFWwindow* window)
 
 	if (!ImGui::IsWindowFocused(ImGuiFocusedFlags_AnyWindow) && ImGui::IsAnyMouseDown())
 	{
+		int delaX = (xpos - mouse_camera_.mousePosAtMouseButtonDown_X);
+		int delaY = -(ypos - mouse_camera_.mousePosAtMouseButtonDown_Y);
+
 		if (ImGui::IsMouseDown(0))
 		{
+			RadeonProRender::matrix rotZ = RadeonProRender::rotation(mouse_camera_.up, (float)delaX * 0.001);
+
+			RadeonProRender::float3 lookAtVec = mouse_camera_.lookat - mouse_camera_.pos;
+			lookAtVec.normalize();
+
+			RadeonProRender::float3 left = RadeonProRender::cross(mouse_camera_.up, lookAtVec);
+			left.normalize();
+
+			RadeonProRender::matrix rotleft = RadeonProRender::rotation(left, (float)delaY * 0.001);
+			RadeonProRender::matrix newMat = rotleft * rotZ * mouse_camera_.mat;
+
+			rprCameraSetTransform(radeon_context_->get_camera(), false, &newMat.m00);
+
+
 			ImVec2 mouse_delta = ImGui::GetMouseDragDelta(0, 0);
 			//scene->
 			ImGui::ResetMouseDragDelta(0);
