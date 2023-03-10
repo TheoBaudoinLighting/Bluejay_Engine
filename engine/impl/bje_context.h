@@ -15,9 +15,11 @@ namespace context
 		{
 		}
 
-		virtual bool init(config::BJE_window_config* window)
+		virtual bool init(int width, int height, config::BJE_window_config* window)
 		{
 			window_ = window;
+			width_ = width;
+			height_ = height;
 			return true;
 		}
 
@@ -27,5 +29,9 @@ namespace context
 
 	protected:
 		config::BJE_window_config* window_;
+
+		int width_ = 0;
+		int height_ = 0;
+
 	};
 }

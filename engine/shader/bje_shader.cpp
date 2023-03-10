@@ -9,7 +9,7 @@
 #include <iostream>
 
 // Load file content
-static std::string load_file(std::string const& name, std::vector<char>& contents, bool binary = false)
+static void load_file(std::string const& name, std::vector<char>& contents, bool binary = false)
 {
 	std::ifstream file(name, std::ios::in | (binary ? std::ios::binary : (std::ios_base::openmode)0));
 
@@ -23,7 +23,7 @@ static std::string load_file(std::string const& name, std::vector<char>& content
 		std::streamoff file_size = file.tellg() - begin;
 		file.seekg(0, std::ios::beg);
 
-		contents.resize((size_t)file_size);
+		contents.resize(static_cast<unsigned>(file_size));
 		file.read(contents.data(), file_size);
 	}
 	else
@@ -34,31 +34,34 @@ static std::string load_file(std::string const& name, std::vector<char>& content
 }
 
 // Compile shader
-static GLuint compile_shader(GLenum type, std::string const& source)
+static GLuint compile_shader(GLenum type, std::vector<GLchar> const& source)
 {
 	GLuint shader = glCreateShader(type);
-	char const* src = source.c_str();
 
-	glShaderSource(shader, 1, &src, nullptr);
+	GLint len = static_cast<GLint>(source.size());
+	GLchar const* source_array = &source[0];
+
+	glShaderSource(shader, 1, &source_array, &len);
 	glCompileShader(shader);
 
-	GLint status;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+	GLint result = GL_TRUE;
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
 
-	if (status == GL_FALSE)
+	if (result == GL_FALSE)
 	{
-		GLint log_length;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_length);
+		std::vector<char> log;
 
-		std::vector<GLchar> log(log_length);
-		glGetShaderInfoLog(shader, log_length, &log_length, log.data());
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
 
-		std::string const shader_type = (type == GL_VERTEX_SHADER ? "vertex" : "fragment");
-		std::cout << "Error: Failed to compile " << shader_type << " shader:" << std::endl;
-		std::cout << log.data() << std::endl;
+		log.resize(len);
+
+		glGetShaderInfoLog(shader, len, &result, &log[0]);
 
 		glDeleteShader(shader);
-		exit(-1);
+
+		throw std::runtime_error(std::string(log.begin(), log.end()));
+
+		return 0;
 	}
 
 	return shader;
@@ -82,50 +85,47 @@ BJE_Shader::~BJE_Shader()
 // Compile program
 GLuint BJE_Shader::compile_program(std::string const& prog_name)
 {
-	std::string vertex_shader_name = prog_name + ".vert";
-	std::string fragment_shader_name = prog_name + ".frag";
+	std::string vsName = prog_name + ".vert";
+	std::string fsName = prog_name + ".frag";
 
-	// Wrap the shader source code in a string
-	std::vector<char> source_code;
+	// Need to wrap the shader program here to be exception-safe
+	std::vector<GLchar> source_code;
 
-	// Wrap the shader source code in a string
-	load_file(vertex_shader_name, source_code);
-	GLuint vertex_shader = compile_shader(GL_VERTEX_SHADER, source_code.data());
 
-	// Wrap the shader source code in a string
-	load_file(fragment_shader_name, source_code);
-	GLuint fragment_shader = compile_shader(GL_FRAGMENT_SHADER, source_code.data());
+	load_file(vsName, source_code);
+	GLuint vertex_shader = compile_shader(GL_VERTEX_SHADER, source_code);
 
-	// Create the program
+
+	load_file(fsName, source_code);
+	GLuint frag_shader = compile_shader(GL_FRAGMENT_SHADER, source_code);
+
 	GLuint program = glCreateProgram();
 
-	// Attach the shaders to the program
 	glAttachShader(program, vertex_shader);
-	glAttachShader(program, fragment_shader);
+	glAttachShader(program, frag_shader);
 
-	// Delete the shaders
 	glDeleteShader(vertex_shader);
-	glDeleteShader(fragment_shader);
+	glDeleteShader(frag_shader);
 
 	glLinkProgram(program);
 
-	// Check the program
 	GLint result = GL_TRUE;
 	glGetProgramiv(program, GL_LINK_STATUS, &result);
 
 	if (result == GL_FALSE)
 	{
-		GLint log_length;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_length);
+		GLint length = 0;
+		std::vector<char> log;
 
-		std::vector<GLchar> log(log_length);
-		glGetProgramInfoLog(program, log_length, &log_length, log.data());
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
 
-		std::cout << "Error: Failed to link program:" << std::endl;
-		std::cout << log.data() << std::endl;
+		log.resize(length);
+
+		glGetProgramInfoLog(program, length, &result, &log[0]);
 
 		glDeleteProgram(program);
-		exit(-1);
+
+		throw std::runtime_error(std::string(log.begin(), log.end()));
 	}
 
 	return program;
@@ -134,18 +134,18 @@ GLuint BJE_Shader::compile_program(std::string const& prog_name)
 // Get program
 GLuint BJE_Shader::get_program(std::string const& prog_name)
 {
-	// Find the program in the map
-	auto program = programs_.find(prog_name);
+	auto iter = programs_.find(prog_name);
 
-	// If the program is not in the map, compile it
-	if (program == programs_.end())
+	if (iter != programs_.end())
 	{
-		// Compile the program
-		program = programs_.insert(std::make_pair(prog_name, compile_program(prog_name))).first;
+		return iter->second;
 	}
-
-	// Return the program
-	return program->second;
+	else
+	{
+		GLuint program = compile_program(prog_name);
+		programs_[prog_name] = program;
+		return program;
+	}
 }
 
 

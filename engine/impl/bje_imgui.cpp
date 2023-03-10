@@ -11,9 +11,12 @@
 
 namespace bje_imgui
 {
-	bool BJE_Imgui::init(config::BJE_window_config* window)
+	bool BJE_Imgui::init(int width, int height, config::BJE_window_config* window)
 	{
-		__super::init(window);
+		// Init base class
+		std::cout << "Initializing Imgui.." << std::endl;
+
+		__super::init(width_, height_, window);
 
 		auto glsl_version = "#version 460";
 
@@ -79,6 +82,7 @@ namespace bje_imgui
 		ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)window_->get_window(), true);
 		ImGui_ImplOpenGL3_Init(glsl_version);
 
+		std::cout << "Imgui initialized.." << std::endl;
 		return true;
 	}
 

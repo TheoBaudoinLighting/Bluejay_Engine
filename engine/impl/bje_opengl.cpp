@@ -13,10 +13,12 @@
 
 namespace bje_opengl
 {
-	bool BJE_OpenGL::init(config::BJE_window_config* window)
+	bool BJE_OpenGL::init(int width, int height, config::BJE_window_config* window)
 	{
+		std::cout << "Initialization OpenGL.." << std::endl;
+
 		// Set the window
-		__super::init(window);
+		__super::init(width_, height_, window);
 
 		auto glsl_version = "#version 460";
 
@@ -60,20 +62,30 @@ namespace bje_opengl
 
 		glfwSwapInterval(1); // Enable vsync
 
+		std::cout << "OpenGL initialized correctly" << std::endl;
+
 		return window;
 	}
 
 	void BJE_OpenGL::init_render()
 	{
+		// Set states
+		//glClearColor(0.0, 0.0, 0.0, 1.0);
+		glCullFace(GL_NONE);
+		glDisable(GL_DEPTH_TEST);
+
 		// Set the clear color
-		const float clear_color[] = {0.45f, 0.55f, 0.60f, 1.00f};
+		//const float clear_color[] = {0.45f, 0.55f, 0.60f, 1.00f};
 
 		// Set the viewport
-		glViewport(0, 0, window_->width_, window_->height_);
+		//glViewport(0, 0, window_->width_, window_->height_);
 
-		glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
+		//glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
 		const int clear_mask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
 		glClear(clear_mask);
+
+		// Enable texturing
+		glEnable(GL_TEXTURE_2D);
 	}
 
 	void BJE_OpenGL::post_render()

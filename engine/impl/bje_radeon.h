@@ -11,18 +11,22 @@
 #include "shader/bje_shader.h"
 
 
+class BJE_window;
+
 namespace bje_radeon
 {
 	class BJE_Radeon : public context::BJE_RenderContext
 	{
 	public:
-		bool init(config::BJE_window_config* window) override;
+		bool init(int width, int height, config::BJE_window_config* window) override;
 
 		void init_render() override;
+		void init_graphic();
 		void post_render() override;
 		void quit_render() override;
 
-		void render();
+		void render_phase_01();
+		void render_phase_02();
 
 		bool get_context();
 		bool get_scene();

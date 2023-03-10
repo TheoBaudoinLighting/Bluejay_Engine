@@ -17,12 +17,16 @@ bool BJE_window::init(int width, int height, const std::string& title)
 	// data
 	width_ = width;
 	height_ = height;
+	// print width and height
+	/*std::cout << "Window width: " << width_ << std::endl;
+	std::cout << "Window height: " << height_ << std::endl;*/
+
 	title_ = title;
 
 	// Context init
-	opengl_context_->init(this);
-	imgui_context_->init(this);
-	radeon_context_->init(this);
+	opengl_context_->init(width_, height_, this);
+	imgui_context_->init(width_, height_, this);
+	radeon_context_->init(width_, height_, this);
 
 	std::cout << "All data proccesing sucessfuly" << std::endl;
 
@@ -217,54 +221,21 @@ void BJE_window::render()
 
 	opengl_context_->init_render();
 	imgui_context_->init_render();
-	radeon_context_->init_render();
 
 	// Draw here
 
+	//const float clear_color[] = { 0.45f, 0.55f, 0.60f, 1.00f }; // clear color
+
+	//glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]); // set clear color
 	
-	radeon_context_->render();
+	radeon_context_->render_phase_01(); // render phase 01
 
+	radeon_context_->render_phase_02(); // render phase 02
 
+	const float clear_color[] = { 0.45f, 0.55f, 0.60f, 1.00f }; // clear color
 
-	// Créer une texture OpenGL pour stocker le rendu de Radeon ProRender
-	GLuint textureID;
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	// Créer un framebuffer Radeon ProRender lié à la texture OpenGL
-	rpr_framebuffer_desc desc = { width, height };
-	desc.format = RPR_FRAMEBUFFER_FORMAT_FLOAT4;
-	desc.depth = 1;
-	rpr_framebuffer frame_buffer;
-	rprContextCreateFrameBuffer(g_rpr_context, desc, &frame_buffer);
-	rprContextSetAOV(g_rpr_context, RPR_AOV_COLOR, frame_buffer);
-
-	// Effectuer le rendu de la scène à l'aide de Radeon ProRender
-	rprContextRender(g_rpr_context);
-	rprFrameBufferGetInfo(frame_buffer, RPR_FRAMEBUFFER_DATA_FLOAT4, g_fbdata.get(), &size);
-
-	// Lier la texture OpenGL et afficher le rendu dans la fenêtre GLFW
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, g_fbdata.get());
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 0); glVertex2f(-1, -1);
-	glTexCoord2f(1, 0); glVertex2f(1, -1);
-	glTexCoord2f(1, 1); glVertex2f(1, 1);
-	glTexCoord2f(0, 1); glVertex2f(-1, 1);
-	glEnd();
-
-
-
-
-
-
-
-
-
+	glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]); // set clear color
+	
 	// Debug console
 	debug_console_->render();
 

@@ -59,7 +59,7 @@ const rpr_creation_flags g_ContextCreationFlags = RPR_CREATION_FLAGS_ENABLE_GPU0
 
 // rpr_context_properties is a list of <property name>, <value>
 // this list must be terminated by <property name> = NULL.
-const rpr_context_properties g_contextProperties[] =
+const rpr_context_properties context_properties[] =
 {
 
 	// define the precompiled kernels folder.
