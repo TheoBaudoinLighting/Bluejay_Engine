@@ -90,6 +90,10 @@ namespace bje_opengl
 
 	void BJE_OpenGL::post_render()
 	{
+
+		//glClear(GL_COLOR_BUFFER_BIT);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 		// Poll the events
 		glfwPollEvents();
 

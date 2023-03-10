@@ -26,6 +26,7 @@ namespace bje_radeon
 			volatile int m_hasUpdate;
 			volatile int m_done;
 			volatile int m_aborted;
+			bool render_ready_;
 			int m_camUpdated;
 			float m_progress;
 
@@ -76,224 +77,38 @@ namespace bje_radeon
 	
 	bool BJE_Radeon::init(int width, int height, config::BJE_window_config* window)
 	{
-		std::cout << "------------------ Initializing Radeon ------------------" << std::endl;
+		// Enumerate each step of the initialization process
 
 		width_ = width;
 		height_ = height;
 
-		// Initialize Radeon
-		rpr_int status = RPR_SUCCESS;
+		window_ = window;
 
-		// Register plugin
-		rpr_int pluginID = rprRegisterPlugin(RPR_PLUGIN_FILE_NAME);
-		CHECK_NE(pluginID, -1);
+		std::cout << "001 Init Graphics" << std::endl;
 
-		rpr_int plugins[] = { pluginID };
-		size_t numPlugins = sizeof(plugins) / sizeof(plugins[0]);
-		std::cout << "Number of plugins : " << numPlugins << std::endl;
-
-		// Create context using single gpu
-		status = rprCreateContext(RPR_API_VERSION, plugins, numPlugins, RPR_CREATION_FLAGS_ENABLE_GPU0, context_properties, nullptr, &rpr_context_);
-		CHECK(status);
-		std::cout << "Rpr context successfully created.." << std::endl;
-
-		// Set active plugin
-		CHECK(rprContextSetActivePlugin(rpr_context_, plugins[0]));
-		std::cout << "Rpr context successfully set active plugin.." << std::endl;
-
-		// Set context material
-		CHECK(rprContextCreateMaterialSystem(rpr_context_, 0, &matsys_));
-		std::cout << "Rpr context successfully set material system.." << std::endl;
-
-		char deviceName_gpu0[1024]; deviceName_gpu0[0] = 0;
-		CHECK(rprContextGetInfo(rpr_context_, RPR_CONTEXT_GPU0_NAME, sizeof(deviceName_gpu0), deviceName_gpu0, 0));
-		std::cout << "GPU0 name : " << std::string(deviceName_gpu0) << std::endl;
-
-		std::cout << "Rpr context successfully created.." << std::endl;
-
-		// TODO : make that properly in function
-
-		// Create scene
-		std::cout << "Creating Radeon scene.." << std::endl;
-
-		CHECK(rprContextCreateScene(rpr_context_, &scene_));
-		std::cout << "Radeon scene successfully created.." << std::endl;
-
-		// Env light
-		CHECK(CreateNatureEnvLight(rpr_context_, scene_, garbage_collector_, 0.9f));
-		std::cout << "Radeon environment light successfully created.." << std::endl;
-
-		// Create camera
-		{
-			CHECK(rprContextCreateCamera(rpr_context_, &camera_));
-			std::cout << "Radeon camera successfully created.." << std::endl;
-
-			// Set camera position
-			CHECK(rprCameraLookAt(camera_, 0.f, 5.f, 20.f, 0, 1, 0, 0, 1, 0));
-			std::cout << "Radeon camera successfully set position.." << std::endl;
-
-			// set camera field of view
-			CHECK(rprCameraSetFocalLength(camera_, 75.f));
-			std::cout << "Radeon camera successfully set field of view.." << std::endl;
-
-			// Set camera for the scene
-			CHECK(rprSceneSetCamera(scene_, camera_));
-			std::cout << "Radeon camera successfully set for the scene.." << std::endl;
-		}
-		// Set scene to render for the context
-		CHECK(rprContextSetScene(rpr_context_, scene_));
-		std::cout << "Radeon scene successfully set for the context.." << std::endl;
-
-		rpr_shape mesh = nullptr;
-		{
-			mesh = ImportOBJ("Meshes/teapot.obj", scene_, rpr_context_);
-			garbage_collector_.GCAdd(mesh);
-			std::cout << "Radeon mesh successfully imported.." << std::endl;
-
-			RadeonProRender::matrix m = RadeonProRender::rotation_x(MY_PI);
-			CHECK(rprShapeSetTransform(mesh, RPR_TRUE, &m.m00));
-			std::cout << "Radeon mesh successfully set transform.." << std::endl;
-		}
-
-		// create the floor 
-		CHECK(CreateAMDFloor(rpr_context_, scene_, matsys_, garbage_collector_, 1.f, 1.f));
-		std::cout << "Radeon floor successfully created.." << std::endl;
-
-		// Create a material for the mesh
-		{
-			rpr_image uber_image1 = nullptr;
-			CHECK(rprContextCreateImageFromFile(rpr_context_, "Textures/lead_rusted_Base_Color.jpg", &uber_image1)); // Good path
-			garbage_collector_.GCAdd(uber_image1);
-			std::cout << "Radeon image successfully created.." << std::endl;
-
-			rpr_image uber_image2 = nullptr;
-			CHECK(rprContextCreateImageFromFile(rpr_context_, "Textures/lead_rusted_Normal.jpg", &uber_image2));
-			garbage_collector_.GCAdd(uber_image2);
-			std::cout << "Radeon image successfully created.." << std::endl;
-
-			rpr_material_node uberMat2_imgTexture1 = nullptr;
-			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_IMAGE_TEXTURE, &uberMat2_imgTexture1));
-			garbage_collector_.GCAdd(uberMat2_imgTexture1);
-			CHECK(rprMaterialNodeSetInputImageDataByKey(uberMat2_imgTexture1, RPR_MATERIAL_INPUT_DATA, uber_image1));
-			std::cout << "Radeon image 01 successfully set for the material.." << std::endl;
-
-			rpr_material_node uberMat2_imgTexture2 = nullptr;
-			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_IMAGE_TEXTURE, &uberMat2_imgTexture2));
-			garbage_collector_.GCAdd(uberMat2_imgTexture2);
-			CHECK(rprMaterialNodeSetInputImageDataByKey(uberMat2_imgTexture2, RPR_MATERIAL_INPUT_DATA, uber_image2));
-			std::cout << "Radeon image 02 successfully set for the material.." << std::endl;
-
-			rpr_material_node matNormalMap = nullptr;
-			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_NORMAL_MAP, &matNormalMap));
-			garbage_collector_.GCAdd(matNormalMap);
-			CHECK(rprMaterialNodeSetInputFByKey(matNormalMap, RPR_MATERIAL_INPUT_SCALE, 1.0f, 1.0f, 1.0f, 1.0f));
-			CHECK(rprMaterialNodeSetInputNByKey(matNormalMap, RPR_MATERIAL_INPUT_COLOR, uberMat2_imgTexture2));
-			std::cout << "Radeon normal map successfully set for the material.." << std::endl;
-
-			rpr_material_node uberMat2 = nullptr;
-			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_UBERV2, &uberMat2));
-			garbage_collector_.GCAdd(uberMat2);
-			std::cout << "Radeon material successfully created.." << std::endl;
-
-			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_COLOR, uberMat2_imgTexture1));
-			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_NORMAL, matNormalMap));
-			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_WEIGHT, 1, 1, 1, 1));
-			std::cout << "Radeon material successfully set base parameters.." << std::endl;
-
-			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_COLOR, uberMat2_imgTexture2));
-			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_NORMAL, matNormalMap));
-			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_WEIGHT, 1, 1, 1, 1));
-			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_ROUGHNESS, 0, 0, 0, 0));
-			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_ANISOTROPY, 0, 0, 0, 0));
-			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_ANISOTROPY_ROTATION, 0, 0, 0, 0));
-			CHECK(rprMaterialNodeSetInputUByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_MODE, RPR_UBER_MATERIAL_IOR_MODE_METALNESS));
-			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_IOR, 1.36, 1.36, 1.36, 1.36));
-			std::cout << "Radeon material successfully set reflection parameters.." << std::endl;
-			
-			CHECK(rprShapeSetMaterial(mesh, uberMat2));
-		}
-
-		CHECK(rprContextSetParameterByKey1f(rpr_context_, RPR_CONTEXT_DISPLAY_GAMMA, 2.2f)); // gamma correction
-		std::cout << "Radeon context successfully set gamma correction.." << std::endl;
-
-		const unsigned int WIN_WIDTH = width_;
-		const unsigned int WIN_HEIGHT = height_;
-
-		rpr_framebuffer_desc desc = { WIN_WIDTH, WIN_HEIGHT };
-
-		rpr_framebuffer_format format = { 4, RPR_COMPONENT_TYPE_FLOAT32 };
-		CHECK(rprContextCreateFrameBuffer(rpr_context_, format, &desc, &frame_buffer_));
-		CHECK(rprContextCreateFrameBuffer(rpr_context_, format, &desc, &frame_buffer_2_));
-		std::cout << "Radeon frame buffer successfully created.." << std::endl;
-
-		// Set framebuffer for the context
-		CHECK(rprContextSetAOV(rpr_context_, RPR_AOV_COLOR, frame_buffer_));
-
-		// framebuffer for the context
-		CHECK(rprContextSetAOV(rpr_context_, RPR_AOV_COLOR, frame_buffer_));
-		std::cout << "Radeon frame buffer successfully set.." << std::endl;
-
-		// Define update callback
-		rprContextSetParameterByKeyPtr(rpr_context_, RPR_CONTEXT_RENDER_UPDATE_CALLBACK_FUNC, (void*)gui_render_impl::notifyUpdate);
-		rprContextSetParameterByKeyPtr(rpr_context_, RPR_CONTEXT_RENDER_UPDATE_CALLBACK_DATA, &update_class);
-		// TODO : check if this is needed
-
-		// do a first rendering iteration, just for to force scene/cache building.
-		std::cout << "Cache and scene building... ";
-		CHECK(rprContextSetParameterByKey1u(rpr_context_, RPR_CONTEXT_ITERATIONS, 1));
-		//CHECK(rprContextRender(rpr_context_));
-		std::cout << "done\n";
-
-		// each rprContextRender call will do `g_batchSize` iterations. 
-		// Note that calling rprContextRender 1 time with RPR_CONTEXT_ITERATIONS = `g_batchSize` is faster than calling rprContextRender `g_batchSize` times with RPR_CONTEXT_ITERATIONS = 1
-		CHECK(rprContextSetParameterByKey1u(rpr_context_, RPR_CONTEXT_ITERATIONS, batch_size_));
-
-		// allocate the data that will be used the read RPR framebuffer, and give it to OpenGL.
-		fbdata_ = std::shared_ptr<float>(new float[width_ * height_ * 4], std::default_delete<float[]>());
-
-		init_graphic();
-
-		// Building the scene
-		std::cout << "------------------ Initializing Radeon done.. ------------------" << std::endl;
-
-		return rpr_context_;
-	}
-
-	// get variable 
-	bool BJE_Radeon::get_context()
-	{
-		return rpr_context_;
-	}
-
-	bool BJE_Radeon::get_scene()
-	{
-		return scene_;
-	}
-
-	
-
-	void BJE_Radeon::init_render()
-	{
-		
-	}
-
-	void BJE_Radeon::init_graphic()
-	{
-
-		// Set states
+		// Init Graphics
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glCullFace(GL_NONE);
 		glDisable(GL_DEPTH_TEST);
+		std::cout << "002 glDisable DEPTH TEST " << std::endl;
 
+
+		std::cout << "003 glViewport" << std::endl;
+		// Viewport
 		glViewport(0, 0, width_, height_);
+		// Enable texturing
+		glEnable(GL_TEXTURE_2D);
 
+
+		// Create vertex and index buffer for a quad
 		glGenBuffers(1, &vertex_buffer_id_);
 		glGenBuffers(1, &index_buffer_id_);
-		std::cout << "Radeon vertex and index buffers successfully created.." << std::endl;
+		std::cout << "004 glGenBuffers" << std::endl;
+
 
 		glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_id_);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_id_);
-		std::cout << "Radeon vertex and index buffers successfully bound.." << std::endl;
+		std::cout << "005 glBindBuffer" << std::endl;
 
 		float quadVertexData[] =
 		{
@@ -308,44 +123,217 @@ namespace bje_radeon
 			0, 1, 3,
 			3, 1, 2
 		};
-		std::cout << "Radeon vertex and index data successfully set.." << std::endl;
+		std::cout << "006 quadVertexData" << std::endl;
+
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertexData), quadVertexData, GL_STATIC_DRAW);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(quadIndexData), quadIndexData, GL_STATIC_DRAW);
-		std::cout << "Radeon vertex and index buffers successfully filled.." << std::endl;
+		std::cout << "007 glBufferData" << std::endl;
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		std::cout << "Radeon vertex and index buffers successfully unbound.." << std::endl;
+		std::cout << "008 glBindBuffer" << std::endl;
 
-		// Create texture
+		// Create a texture for FR rendering
 		glActiveTexture(GL_TEXTURE0);
 		glGenTextures(1, &texture_);
-		std::cout << "Radeon texture successfully created.." << std::endl;
+		std::cout << "009 glGenTextures" << std::endl;
 
 		glBindTexture(GL_TEXTURE_2D, texture_);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		std::cout << "Radeon texture successfully set.." << std::endl;
+		std::cout << "010 glTexParameteri" << std::endl;
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width_, height_, 0, GL_RGBA, GL_FLOAT, NULL);
-		// print width and height
-		std::cout << "Texture window in init renderer = " << width_ << " and " << height_ << std::endl;
-
-		// TODO : check if this working
-		std::cout << "Radeon texture successfully filled.." << std::endl;
 
 		glBindTexture(GL_TEXTURE_2D, 0);
-		std::cout << "Radeon texture successfully unbound.." << std::endl;
+		std::cout << "011 glBindTexture" << std::endl;
 
-		init_render();
+		init_graphic();
+
+		return true;
+	}
+
+	// get variable 
+	bool BJE_Radeon::get_context()
+	{
+		return rpr_context_;
+	}
+
+	bool BJE_Radeon::get_scene()
+	{
+		return scene_;
+	}
+	
+	bool BJE_Radeon::init_graphic()
+	{
+		std::cout << "------------------ Initializing Radeon ------------------" << std::endl;
+
+		// Initialize Radeon
+
+		rpr_int status = RPR_SUCCESS;
+		std::cout << "RPR_API_VERSION : " << RPR_API_VERSION << std::endl;
+
+		// Enumerate each step
+		
+		rpr_int pluginID = rprRegisterPlugin(RPR_PLUGIN_FILE_NAME);
+		CHECK_NE(pluginID, -1);
+		std::cout << "012 Rpr plugin successfully registered.." << std::endl;
+
+		rpr_int plugins[] = { pluginID };
+		size_t numPlugins = sizeof(plugins) / sizeof(plugins[0]);
+		std::cout << "Number of plugins : " << numPlugins << std::endl;
+		std::cout << "013 Rpr plugin successfully registered.." << std::endl;
+		
+		status = rprCreateContext(RPR_API_VERSION, plugins, numPlugins, RPR_CREATION_FLAGS_ENABLE_GPU0, context_properties, nullptr, &rpr_context_);
+		CHECK(status);
+		std::cout << "Rpr context successfully created.." << std::endl;
+		std::cout << "014 Rpr context successfully created.." << std::endl;
+		
+		CHECK(rprContextSetActivePlugin(rpr_context_, plugins[0]));
+		std::cout << "Rpr context successfully set active plugin.." << std::endl;
+		std::cout << "015 Rpr context successfully set active plugin.." << std::endl;
+		
+		CHECK(rprContextCreateMaterialSystem(rpr_context_, 0, &matsys_));
+		std::cout << "Rpr context successfully set material system.." << std::endl;
+		std::cout << "016 Rpr context successfully set material system.." << std::endl;
+
+		char deviceName_gpu0[1024]; deviceName_gpu0[0] = 0;
+		CHECK(rprContextGetInfo(rpr_context_, RPR_CONTEXT_GPU0_NAME, sizeof(deviceName_gpu0), deviceName_gpu0, 0));
+		std::cout << "GPU0 name : " << std::string(deviceName_gpu0) << std::endl;
+		std::cout << "017 GPU0 name : " << std::string(deviceName_gpu0) << std::endl;
+
+		std::cout << "Rpr context successfully created.." << std::endl;
+		
+		std::cout << "Creating Radeon scene.." << std::endl;
+
+		CHECK(rprContextCreateScene(rpr_context_, &scene_));
+		std::cout << "018 Radeon scene successfully created.." << std::endl;
+		
+		CHECK(CreateNatureEnvLight(rpr_context_, scene_, garbage_collector_, 0.9f));
+		std::cout << "019 Radeon environment light successfully created.." << std::endl;
+		
+		{
+			CHECK(rprContextCreateCamera(rpr_context_, &camera_));
+			
+			CHECK(rprCameraLookAt(camera_, 0.f, 5.f, 20.f, 0, 1, 0, 0, 1, 0));
+			
+			CHECK(rprCameraSetFocalLength(camera_, 75.f));
+			
+			CHECK(rprSceneSetCamera(scene_, camera_));
+		}
+
+		CHECK(rprContextSetScene(rpr_context_, scene_));
+		std::cout << "020 Radeon scene successfully set.." << std::endl;
+
+		rpr_shape mesh = nullptr;
+		{
+			mesh = ImportOBJ("Meshes/teapot.obj", scene_, rpr_context_);
+			garbage_collector_.GCAdd(mesh);
+
+			RadeonProRender::matrix m = RadeonProRender::rotation_x(MY_PI);
+			CHECK(rprShapeSetTransform(mesh, RPR_TRUE, &m.m00));
+		}
+		std::cout << "021 Radeon mesh successfully created.." << std::endl;
+		
+		CHECK(CreateAMDFloor(rpr_context_, scene_, matsys_, garbage_collector_, 1.f, 1.f));
+		std::cout << "022 Radeon floor successfully created.." << std::endl;
+		
+		{
+			rpr_image uber_image1 = nullptr;
+			CHECK(rprContextCreateImageFromFile(rpr_context_, "Textures/lead_rusted_Base_Color.jpg", &uber_image1)); // Good path
+			garbage_collector_.GCAdd(uber_image1);
+
+			rpr_image uber_image2 = nullptr;
+			CHECK(rprContextCreateImageFromFile(rpr_context_, "Textures/lead_rusted_Normal.jpg", &uber_image2));
+			garbage_collector_.GCAdd(uber_image2);
+
+			rpr_material_node uberMat2_imgTexture1 = nullptr;
+			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_IMAGE_TEXTURE, &uberMat2_imgTexture1));
+			garbage_collector_.GCAdd(uberMat2_imgTexture1);
+			CHECK(rprMaterialNodeSetInputImageDataByKey(uberMat2_imgTexture1, RPR_MATERIAL_INPUT_DATA, uber_image1));
+
+
+			rpr_material_node uberMat2_imgTexture2 = nullptr;
+			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_IMAGE_TEXTURE, &uberMat2_imgTexture2));
+			garbage_collector_.GCAdd(uberMat2_imgTexture2);
+			CHECK(rprMaterialNodeSetInputImageDataByKey(uberMat2_imgTexture2, RPR_MATERIAL_INPUT_DATA, uber_image2));
+
+
+			rpr_material_node matNormalMap = nullptr;
+			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_NORMAL_MAP, &matNormalMap));
+			garbage_collector_.GCAdd(matNormalMap);
+			CHECK(rprMaterialNodeSetInputFByKey(matNormalMap, RPR_MATERIAL_INPUT_SCALE, 1.0f, 1.0f, 1.0f, 1.0f));
+			CHECK(rprMaterialNodeSetInputNByKey(matNormalMap, RPR_MATERIAL_INPUT_COLOR, uberMat2_imgTexture2));
+
+
+			rpr_material_node uberMat2 = nullptr;
+			CHECK(rprMaterialSystemCreateNode(matsys_, RPR_MATERIAL_NODE_UBERV2, &uberMat2));
+			garbage_collector_.GCAdd(uberMat2);
+
+			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_COLOR, uberMat2_imgTexture1));
+			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_NORMAL, matNormalMap));
+			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_DIFFUSE_WEIGHT, 1, 1, 1, 1));
+
+			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_COLOR, uberMat2_imgTexture2));
+			CHECK(rprMaterialNodeSetInputNByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_NORMAL, matNormalMap));
+			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_WEIGHT, 1, 1, 1, 1));
+			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_ROUGHNESS, 0, 0, 0, 0));
+			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_ANISOTROPY, 0, 0, 0, 0));
+			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_ANISOTROPY_ROTATION, 0, 0, 0, 0));
+			CHECK(rprMaterialNodeSetInputUByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_MODE, RPR_UBER_MATERIAL_IOR_MODE_METALNESS));
+			CHECK(rprMaterialNodeSetInputFByKey(uberMat2, RPR_MATERIAL_INPUT_UBER_REFLECTION_IOR, 1.36, 1.36, 1.36, 1.36));
+			
+			CHECK(rprShapeSetMaterial(mesh, uberMat2));
+		}
+
+		std::cout << "023 Radeon material successfully created.." << std::endl;
+
+
+		CHECK(rprContextSetParameterByKey1f(rpr_context_, RPR_CONTEXT_DISPLAY_GAMMA, 2.2f)); // gamma correction
+		std::cout << "024 Radeon gamma correction successfully set.." << std::endl;
+
+		const unsigned int WIN_WIDTH = width_;
+		const unsigned int WIN_HEIGHT = height_;
+
+		rpr_framebuffer_desc desc = { WIN_WIDTH, WIN_HEIGHT };
+
+		rpr_framebuffer_format format = { 4, RPR_COMPONENT_TYPE_FLOAT32 };
+		CHECK(rprContextCreateFrameBuffer(rpr_context_, format, &desc, &frame_buffer_));
+		CHECK(rprContextCreateFrameBuffer(rpr_context_, format, &desc, &frame_buffer_2_));
+		std::cout << "025 Radeon frame buffer successfully created.." << std::endl;
+
+		
+		CHECK(rprContextSetAOV(rpr_context_, RPR_AOV_COLOR, frame_buffer_));
+		
+		CHECK(rprContextSetAOV(rpr_context_, RPR_AOV_COLOR, frame_buffer_));
+		std::cout << "026 Radeon AOV successfully set.." << std::endl;
+		
+		rprContextSetParameterByKeyPtr(rpr_context_, RPR_CONTEXT_RENDER_UPDATE_CALLBACK_FUNC, (void*)gui_render_impl::notifyUpdate);
+		rprContextSetParameterByKeyPtr(rpr_context_, RPR_CONTEXT_RENDER_UPDATE_CALLBACK_DATA, &update_class);
+
+
+		std::cout << "027 Cache and scene building... " << std::endl;
+		CHECK(rprContextSetParameterByKey1u(rpr_context_, RPR_CONTEXT_ITERATIONS, 1));
+		std::cout << "028 done\n";
+
+		CHECK(rprContextSetParameterByKey1u(rpr_context_, RPR_CONTEXT_ITERATIONS, batch_size_));
+
+
+		fbdata_ = std::shared_ptr<float>(new float[width_ * height_ * 4], std::default_delete<float[]>());
+
+
+		// Building the scene
+		std::cout << "------------------ Initializing Radeon done.. ------------------" << std::endl;
+
+		return rpr_context_;
 	}
 
 	void BJE_Radeon::post_render()
 	{
-		glfwPostEmptyEvent();
+		
 	}
 
 	void BJE_Radeon::quit_render()
@@ -367,105 +355,23 @@ namespace bje_radeon
 		std::cout << "Radeon is out.." << std::endl;
 	}
 
-	void BJE_Radeon::render_phase_01()
-	{
-		// Render the scene with Radeon ProRender
-		
-
-		glGenBuffers(1, &vertex_buffer_id_);
-		glGenBuffers(1, &index_buffer_id_);
-
-		glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_id_);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_id_);
-
-		float quadVertexData[] =
-		{
-			-1, -1, 0.5, 0, 0,
-			1, -1, 0.5, 1, 0,
-			1,  1, 0.5, 1, 1,
-			-1,  1, 0.5, 0, 1
-		};
-
-		GLshort quadIndexData[] =
-		{
-			0, 1, 3,
-			3, 1, 2
-		};
-
-		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertexData), quadVertexData, GL_STATIC_DRAW);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(quadIndexData), quadIndexData, GL_STATIC_DRAW);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-		// Create texture
-		glActiveTexture(GL_TEXTURE0);
-		glGenTextures(1, &texture_);
-
-		glBindTexture(GL_TEXTURE_2D, texture_);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width_, height_, 0, GL_RGBA, GL_FLOAT, NULL);
-
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		
-	}
-	
 	void render_job(rpr_context ctxt, gui_render_impl::update* update)
 	{
-		rprContextRender(ctxt);
-		update_class.m_done = 1;
+		CHECK(rprContextRender(ctxt));
+		//rprContextRender(ctxt);
+		update->render_ready_ = true;
 		return;
+		
 	}
 
-	void BJE_Radeon::render_phase_02()
+	void BJE_Radeon::init_render()
 	{
-		
-		//// clear state
-		//update_class.clear(); // reset the update class
 
-		//std::thread t(&render_job, rpr_context_, &update_class); // start the render job
-		
-
-		//rprContextRender(rpr_context_);
-		
-
-		const auto timeUpdateStarts = std::chrono::high_resolution_clock::now(); // get the time
-
-		if (benchmark_start == invalid_time) 
-			benchmark_start = timeUpdateStarts; // set the start time
-		if (benchmark_number_of_render_iteration >= 100)
-		{
-			double elapsed_time_ms = std::chrono::duration<double, std::milli>(timeUpdateStarts - benchmark_start).count(); // get the time
-			double renderPerSecond = (double)benchmark_number_of_render_iteration * 1000.0 / elapsed_time_ms; // calculate the render per second
-			std::cout << renderPerSecond << " iterations per second." << std::endl; // print the render per second
-			benchmark_number_of_render_iteration = 0; // reset the render iteration
-			benchmark_start = timeUpdateStarts; // reset the start time
-
-		}
+	}
 
 
-		CHECK(rprContextResolveFrameBuffer(rpr_context_, frame_buffer_, frame_buffer_2_, false));  // resolve the frame buffer
-		size_t frame_buffer_dataSize = 0; // get the frame buffer size
-		CHECK(rprFrameBufferGetInfo(frame_buffer_2_, RPR_FRAMEBUFFER_DATA, 0, NULL, &frame_buffer_dataSize)); // get the frame buffer size
-
-
-		if (frame_buffer_dataSize != width_ * height_ * 4 * sizeof(float)) // check if the frame buffer size is correct
-		{
-			CHECK(RPR_ERROR_INTERNAL_ERROR) // if not, throw an error
-		}
-
-		CHECK(rprFrameBufferGetInfo(frame_buffer_2_, RPR_FRAMEBUFFER_DATA, frame_buffer_dataSize, fbdata_.get(), NULL)); // get the frame buffer data
-
-
-		glBindTexture(GL_TEXTURE_2D, texture_); // bind the texture
-		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width_, height_, GL_RGBA, GL_FLOAT, static_cast<const GLvoid*>(fbdata_.get())); // set the texture data
-		glBindTexture(GL_TEXTURE_2D, 0); // unbind the texture
-
+	void BJE_Radeon::render_phase_01()
+	{
 		// Bind vertex & index buffers of a quad
 		glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_id_);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_id_);
@@ -479,7 +385,7 @@ namespace bje_radeon
 		CHECK_GE(texture_loc, 0);
 
 		glUniform1i(texture_loc, 0);
-
+		
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture_);
 		//glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_FLOAT, static_cast<const GLvoid*>(g_fbdata));         
@@ -503,14 +409,62 @@ namespace bje_radeon
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glUseProgram(0);
+	}
+	
+	void BJE_Radeon::render_phase_02()
+	{
+		const auto timeUpdateStarts = std::chrono::high_resolution_clock::now();
+
+
+		//
+		// print render stats every ~100 iterations.
+		//
+		if (benchmark_start == invalid_time)
+			benchmark_start = timeUpdateStarts;
+		if (benchmark_number_of_render_iteration >= 100)
+		{
+			double elapsed_time_ms = std::chrono::duration<double, std::milli>(timeUpdateStarts - benchmark_start).count();
+			double renderPerSecond = (double)benchmark_number_of_render_iteration * 1000.0 / elapsed_time_ms;
+			std::cout << renderPerSecond << " iterations per second." << std::endl;
+			benchmark_number_of_render_iteration = 0;
+			benchmark_start = timeUpdateStarts;
+
+		}
+
+		update_class.clear();
+
+		std::thread bje_thread(&render_job, rpr_context_, &update_class);
+
+		while (!update_class.render_ready_)
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		}
 		
+		// Lire le frame buffer depuis RPR
+		CHECK(rprContextResolveFrameBuffer(rpr_context_, frame_buffer_, frame_buffer_2_, false));
 
-		update_class.m_hasUpdate = false; 
+		size_t frame_buffer_dataSize = 0;
+		CHECK(rprFrameBufferGetInfo(frame_buffer_2_, RPR_FRAMEBUFFER_DATA, 0, NULL, &frame_buffer_dataSize));
 
-		// wait the end of the rendering thread
-		/*t.join();*/ // wait the end of the rendering thread
+		// Vérifier que la taille correspond à l'allocation de buffer original
+		if (frame_buffer_dataSize != width_ * height_ * 4 * sizeof(float)) {
+			CHECK(RPR_ERROR_INTERNAL_ERROR)
+		}
 
-		benchmark_number_of_render_iteration += batch_size_; // increment the render iteration
+		CHECK(rprFrameBufferGetInfo(frame_buffer_2_, RPR_FRAMEBUFFER_DATA, frame_buffer_dataSize, fbdata_.get(), NULL));
+
+		// Mettre à jour la texture OpenGL avec la nouvelle image depuis RPR
+		glBindTexture(GL_TEXTURE_2D, texture_);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width_, height_, GL_RGBA, GL_FLOAT, static_cast<const GLvoid*>(fbdata_.get()));
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		// Réinitialiser le booléen de frame prêt
+		update_class.render_ready_ = false;
+
+		bje_thread.join();
+
+		benchmark_number_of_render_iteration += batch_size_;
+
 	}
 
 }

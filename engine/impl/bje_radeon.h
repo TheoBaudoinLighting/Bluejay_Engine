@@ -1,12 +1,15 @@
 #pragma once
 
 
+#include <thread>
+
 #include "glad/glad.h"
 #include "bje_context.h"
 #include "../window/bje_window.h"
 #include "RadeonProRender.h"
 #include "RadeonProRender_GL.h"
 #include "common.h"
+#include "imgui.h"
 #include "GLFW/glfw3.h"
 #include "shader/bje_shader.h"
 
@@ -21,7 +24,7 @@ namespace bje_radeon
 		bool init(int width, int height, config::BJE_window_config* window) override;
 
 		void init_render() override;
-		void init_graphic();
+		bool init_graphic();
 		void post_render() override;
 		void quit_render() override;
 
@@ -44,13 +47,19 @@ namespace bje_radeon
 
 	private:
 
+
+
 		// GLFW window
 		int width_ = 0;
 		int height_ = 0;
+		config::BJE_window_config* window_ = nullptr;
 
 		// Iteration
 		const int batch_size_ = 15;
+		bool frame_ready_ = false;
+		
 
+		ImVec2 size_ = ImVec2(0, 0);
 
 		rpr_context         rpr_context_ = NULL;
 		GLuint              vertex_buffer_id_ = 0;

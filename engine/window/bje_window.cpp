@@ -83,13 +83,8 @@ void BJE_window::resize(int width, int height)
 
 BJE_window* BJE_window::from_native_window(GLFWwindow* window)
 {
-	// Créer une instance de la classe "BJE_window"
 	BJE_window* bje_window = new BJE_window();
-
-	// Stocker le pointeur de la fenêtre native GLFW dans l'instance de la classe "BJE_window"
 	bje_window->set_native_window(window);
-
-	// Retourner l'instance de la classe "BJE_window"
 	return bje_window;
 }
 
@@ -201,16 +196,15 @@ void BJE_window::close()
 	// the destructor is called after each
 	// BJE_window object is destroyed
 
-	radeon_context_->quit_render();
 	imgui_context_->quit_render();
 	opengl_context_->quit_render();
+	radeon_context_->quit_render();
 
 	// Shutdown the renderer
 	is_running_ = false;
 }
 
 
-// render all data here 
 
 // render window
 void BJE_window::render()
@@ -224,16 +218,22 @@ void BJE_window::render()
 
 	// Draw here
 
-	//const float clear_color[] = { 0.45f, 0.55f, 0.60f, 1.00f }; // clear color
 
-	//glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]); // set clear color
+
+
 	
 	radeon_context_->render_phase_01(); // render phase 01
 
 	radeon_context_->render_phase_02(); // render phase 02
 
-	const float clear_color[] = { 0.45f, 0.55f, 0.60f, 1.00f }; // clear color
 
+
+
+
+
+
+
+	const float clear_color[] = { 0.45f, 0.55f, 0.60f, 1.00f }; // clear color
 	glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]); // set clear color
 	
 	// Debug console
@@ -249,8 +249,8 @@ void BJE_window::render()
 
 	// End frame
 	imgui_context_->post_render();
-	radeon_context_->post_render();
 	opengl_context_->post_render();
+	radeon_context_->post_render();
 
 	// update window
 	update(BJE_window_);

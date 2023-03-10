@@ -54,7 +54,7 @@ private:
 // Main function
 int main()
 {
-	auto core_BJE = std::make_unique<core>(1280, 800, "Bluejay Engine");
+	auto core_BJE = std::make_unique<core>(640, 480, "Bluejay Engine");
 
 	core_BJE->main_loop();
 }
