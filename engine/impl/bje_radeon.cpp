@@ -164,6 +164,8 @@ namespace bje_radeon
 
 	bool BJE_Radeon::init_graphic()
 	{
+
+
 		std::cout << "------------------ Initializing Radeon ------------------" << std::endl;
 
 		// Initialize Radeon
@@ -200,34 +202,27 @@ namespace bje_radeon
 
 		CHECK(CreateNatureEnvLight(rpr_context_, scene_, garbage_collector_, 1.0f));
 
-		{
-			CHECK(rprContextCreateCamera(rpr_context_, &camera_));
 
-			CHECK(rprCameraLookAt(camera_, 0.f, 5.f, 20.f, 0, 1, 0, 0, 1, 0));
+		camera_.init(scene_, rpr_context_); // init camera
 
-			CHECK(rprCameraSetFocalLength(camera_, 75.f));
-
-			CHECK(rprSceneSetCamera(scene_, camera_));
-		}
 
 		CHECK(rprContextSetScene(rpr_context_, scene_));
 
-		std::cout << "Loading mesh\n";
-		rpr_shape mesh = nullptr;
-		{
-			Assimp::Importer importer;
-			const aiScene* scene = importer.ReadFile("Meshes/teapot.obj",
-			                                         aiProcess_Triangulate | aiProcess_GenSmoothNormals |
-			                                         aiProcess_FlipUVs);
+		auto mesh = importer_.load_obj("Meshes/teapot.obj", scene_, rpr_context_);
 
+		//std::cout << "Loading mesh\n";
+		//rpr_shape mesh = nullptr;
+		//{
 
-			//mesh = rpr_shape(scene);
-			mesh = ImportOBJ("Meshes/teapot.obj", scene_, rpr_context_);
-			garbage_collector_.GCAdd(mesh);
+		//	//mesh = rpr_shape(scene);
+		//	mesh = ImportOBJ("Meshes/teapot.obj", scene_, rpr_context_);
+		//	garbage_collector_.GCAdd(mesh);
 
-			RadeonProRender::matrix m = RadeonProRender::rotation_x(MY_PI);
-			CHECK(rprShapeSetTransform(mesh, RPR_TRUE, &m.m00));
-		}
+		//	RadeonProRender::matrix m = RadeonProRender::rotation_x(MY_PI); // rotate 180 degrees around X axis
+		//	CHECK(rprShapeSetTransform(mesh, RPR_TRUE, &m.m00)); // set transform
+		//}
+
+		
 
 
 		CHECK(CreateAMDFloor(rpr_context_, scene_, matsys_, garbage_collector_, 1.f, 1.f));
@@ -336,8 +331,8 @@ namespace bje_radeon
 	{
 		std::cout << "Release memory.." << std::endl;
 
-		CHECK(rprObjectDelete(camera_));
-		camera_ = nullptr;
+		camera_.destroy(); // destroy camera
+
 		CHECK(rprObjectDelete(matsys_));
 		matsys_ = nullptr;
 		CHECK(rprObjectDelete(frame_buffer_));

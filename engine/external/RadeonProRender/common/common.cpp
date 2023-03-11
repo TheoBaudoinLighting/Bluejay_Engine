@@ -260,8 +260,7 @@ rpr_shape ImportOBJ(const std::string& file, rpr_scene scene, rpr_context ctx)
 	}	
 
 	rpr_shape meshA = 0;
-    status = rprContextCreateMesh(ctx,
-		(rpr_float const*)&pos[0], pos.size()/3 , 3*sizeof(float),
+    status = rprContextCreateMesh(ctx,(rpr_float const*)&pos[0], pos.size()/3 , 3*sizeof(float),
         (rpr_float const*)&normal[0], normal.size()/3 , 3*sizeof(float),
         (rpr_float const*)&texture[0], texture.size()/2 , 2*sizeof(float),
         (rpr_int const*)&face_pos[0], sizeof(rpr_int),

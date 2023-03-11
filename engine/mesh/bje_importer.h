@@ -9,40 +9,35 @@
 #include "RprLoadStore.h"//For Export
 #include "../common/common.h"
 
-#define TINYOBJLOADER_IMPLEMENTATION
 #include "picojson.h"
 #include "../common/tiny_obj_loader.h"
-// Importer
+#include "garbage/bje_garbage_collector.h"
 
-class BJE_Importer
+
+namespace import
 {
-public:
-
-	/*struct BJE_Shape_Setting
+	class BJE_Importer
 	{
-		std::string name = "teapot";
-		std::string path = "Meshes/teapot.obj";
+	public:
 
-		RadeonProRender::float3 position = RadeonProRender::float3(0.0f, 0.0f, 0.0f);
-		RadeonProRender::float3 rotation = RadeonProRender::float3(0.0f, 0.0f, 0.0f);
-		RadeonProRender::float3 scale = RadeonProRender::float3(1.0f, 1.0f, 1.0f);
+		BJE_Importer() {}
+		~BJE_Importer() {}
+
+		void init(rpr_scene scene_, rpr_context rpr_context_);
+
+		rpr_shape load_obj(const std::string& filename, rpr_scene scene_, rpr_context rpr_context_);
+
+
+
+	private:
+
+		BJE_Garbage garbage_collector_;
+
+		
+
 	};
 
-	const BJE_Shape_Setting parse_shape_settings(const picojson::value& config);
-
-	void import_obj(rpr_context& context, rpr_scene& scene, rpr_material_system matsys, const BJE_Shape_Setting);*/
-
-
-
-
-
-
-
-
-
-};
-
-
+}
 
 
 

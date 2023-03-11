@@ -1,5 +1,5 @@
 #pragma once
-class bje_aabb
+class bje_material
 {
 };
 

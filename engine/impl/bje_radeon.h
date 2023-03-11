@@ -10,7 +10,9 @@
 #include "RadeonProRender_GL.h"
 #include "common.h"
 #include "imgui.h"
+#include "camera/bje_camera.h"
 #include "GLFW/glfw3.h"
+#include "mesh/bje_importer.h"
 #include "shader/bje_shader.h"
 
 
@@ -59,6 +61,10 @@ namespace bje_radeon
 		const int batch_size_ = 15;
 		bool frame_ready_ = false;
 
+		// Import other class
+		camera::BJE_Camera camera_;
+		import::BJE_Importer importer_;
+
 
 		ImVec2 size_ = ImVec2(0, 0);
 
@@ -71,7 +77,7 @@ namespace bje_radeon
 		rpr_material_system matsys_;
 		BJE_Shader shader_manager_;
 		rpr_scene scene_ = nullptr;
-		rpr_camera camera_ = nullptr;
+		//rpr_camera camera_ = nullptr;
 		std::shared_ptr<float> fbdata_ = nullptr;
 		RPRGarbageCollector garbage_collector_;
 		bool ask_exit_ = false; // push X key to exit

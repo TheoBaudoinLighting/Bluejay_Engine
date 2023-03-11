@@ -171,7 +171,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="engine\inputs\bje_inputs.cpp" />
+    <ClCompile Include="engine\garbage\bje_garbage_collector.cpp" />
+    <ClCompile Include="engine\texture\bje_texture.cpp" />
+    <ClCompile Include="engine\camera\bje_camera.cpp" />
+    <ClCompile Include="engine\scene\bje_scene.cpp" />
     <ClCompile Include="engine\external\RadeonRays\bbox.cpp" />
     <ClCompile Include="engine\external\RadeonRays\bvh.cpp" />
     <ClCompile Include="engine\external\RadeonRays\split_bvh.cpp" />
@@ -179,10 +182,6 @@
     <ClCompile Include="engine\external\RadeonProRender\common\common.cpp" />
     <ClCompile Include="engine\external\RadeonProRender\inc\Math\half.cpp" />
     <ClCompile Include="engine\shader\bje_shader.cpp" />
-    <ClCompile Include="engine\bvh\bje_aabb.cpp" />
-    <ClCompile Include="engine\bvh\bje_aarect.cpp" />
-    <ClCompile Include="engine\bvh\bje_bvh.cpp" />
-    <ClCompile Include="engine\bvh\bje_onb.cpp" />
     <ClCompile Include="engine\user_interface\bje_debug.cpp" />
     <ClCompile Include="engine\user_interface\bje_log_console.cpp" />
     <ClCompile Include="engine\impl\bje_radeon.cpp" />
@@ -201,7 +200,10 @@
     <ClCompile Include="engine\external\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\inputs\bje_inputs.h" />
+    <ClInclude Include="engine\garbage\bje_garbage_collector.h" />
+    <ClInclude Include="engine\texture\bje_texture.h" />
+    <ClInclude Include="engine\camera\bje_camera.h" />
+    <ClInclude Include="engine\scene\bje_scene.h" />
     <ClInclude Include="engine\external\assimp\Compiler\poppack1.h" />
     <ClInclude Include="engine\external\assimp\Compiler\pstdint.h" />
     <ClInclude Include="engine\external\assimp\Compiler\pushpack1.h" />
@@ -321,10 +323,6 @@
     <ClInclude Include="engine\external\RadeonProRender\inc\rprDeprecatedApi.h" />
     <ClInclude Include="engine\external\RadeonProRender\inc\RprLoadStore.h" />
     <ClInclude Include="engine\shader\bje_shader.h" />
-    <ClInclude Include="engine\bvh\bje_aabb.h" />
-    <ClInclude Include="engine\bvh\bje_aarect.h" />
-    <ClInclude Include="engine\bvh\bje_bvh.h" />
-    <ClInclude Include="engine\bvh\bje_onb.h" />
     <ClInclude Include="engine\external\eigen\Eigen\src\Cholesky\LDLT.h" />
     <ClInclude Include="engine\external\eigen\Eigen\src\Cholesky\LLT.h" />
     <ClInclude Include="engine\external\eigen\Eigen\src\Cholesky\LLT_LAPACKE.h" />
