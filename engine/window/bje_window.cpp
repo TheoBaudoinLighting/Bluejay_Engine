@@ -1,19 +1,22 @@
 
 #include <iostream>
 
-#include "glad/glad.h"
 #include "bje_window.h"
 
 // imgui
 #include "imgui.h"
 
 // ui
+#include "inputs/bje_inputs.h"
 #include "Math/mathutils.h"
 #include "user_interface/bje_debug.h"
 
-struct MOUSE_DRAG_INFO
+bje_radeon::BJE_Radeon* radeon_context_;
+
+
+struct mouse_drag_info
 {
-	MOUSE_DRAG_INFO()
+	mouse_drag_info()
 	{
 		leftMouseButtonDown = false;
 		mousePosAtMouseButtonDown_X = -1;
@@ -30,7 +33,8 @@ struct MOUSE_DRAG_INFO
 
 	bool leftMouseButtonDown;
 };
-MOUSE_DRAG_INFO mouse_camera_;
+mouse_drag_info mouse_camera_;
+//auto camera_ = radeon_context_->get_camera();
 
 bool BJE_window::init(int width, int height, const std::string& title)
 {
@@ -108,124 +112,63 @@ BJE_window* BJE_window::from_native_window(GLFWwindow* window)
 	return bje_window;
 }
 
-
-
-// update
 void BJE_window::update(GLFWwindow* window)
 {
-	// input
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(window, true);
-		std::cout << "Escape key pressed" << std::endl;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		is_key_pressed_ = true;
-		key_down_ = GLFW_KEY_DOWN;
-	}
-	else
-	{
-		is_key_pressed_ = false;
-		key_up_ = GLFW_KEY_DOWN;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-	{
-		key_up_ = 'z';
-		std::cout << "Key up pressed" << std::endl;
-	}
-
-	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		key_down_ = 's';
-		std::cout << "Key down pressed" << std::endl;
-	}
-
-	else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-	{
-		key_up_ = 'q';
-		std::cout << "Key left pressed" << std::endl;
-	}
-
-	else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-	{
-		key_down_ = 'd';
-		std::cout << "Key right pressed" << std::endl;
-	}
-
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-		is_left_mouse_clicked_ = true;
-	else
-		is_left_mouse_clicked_ = false;
-
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
-		is_right_mouse_clicked_ = true;
-	else
-		is_right_mouse_clicked_ = false;
-
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS)
-		is_middle_mouse_clicked_ = true;
-	else
-		is_middle_mouse_clicked_ = false;
-
-	double xpos, ypos;
-
-	glfwGetCursorPos(window, &xpos, &ypos);
-
-	mouse_motion_.x = xpos - mouse_position_.x;
-	mouse_motion_.y = ypos - mouse_position_.y;
-
-	mouse_position_.x = xpos;
-	mouse_position_.y = ypos;
+	key_pressed = false;
 
 	if (!ImGui::IsWindowFocused(ImGuiFocusedFlags_AnyWindow) && ImGui::IsAnyMouseDown())
 	{
-		int delaX = (xpos - mouse_camera_.mousePosAtMouseButtonDown_X);
-		int delaY = -(ypos - mouse_camera_.mousePosAtMouseButtonDown_Y);
-
 		if (ImGui::IsMouseDown(0))
 		{
-			RadeonProRender::matrix rotZ = RadeonProRender::rotation(mouse_camera_.up, (float)delaX * 0.001);
+			ImVec2 mouseDelta = ImGui::GetMouseDragDelta(0, 0);
+			//camera_->offset_orientation(mouseDelta.x, mouseDelta.y);
+			
+			RadeonProRender::matrix rotZ = RadeonProRender::rotation(mouse_camera_.up, (float)mouseDelta.x * 0.001);
 
-			RadeonProRender::float3 lookAtVec = mouse_camera_.lookat - mouse_camera_.pos;
-			lookAtVec.normalize();
+			RadeonProRender::float3 look_at_vec = mouse_camera_.lookat - mouse_camera_.pos;
+			look_at_vec.normalize();
 
-			RadeonProRender::float3 left = RadeonProRender::cross(mouse_camera_.up, lookAtVec);
+			RadeonProRender::float3 left = RadeonProRender::cross(mouse_camera_.up, look_at_vec);
 			left.normalize();
 
-			RadeonProRender::matrix rotleft = RadeonProRender::rotation(left, (float)delaY * 0.001);
-			RadeonProRender::matrix newMat = rotleft * rotZ * mouse_camera_.mat;
+			RadeonProRender::matrix rot_left = RadeonProRender::rotation(left, (float)mouseDelta.y * 0.001);
+			RadeonProRender::matrix new_mat = rot_left * rotZ * mouse_camera_.mat;
 
-			rprCameraSetTransform(radeon_context_->get_camera(), false, &newMat.m00);
+			//rprCameraSetTransform(mouse_camera_, false, &new_mat.m00);
 
+			//CHECK(rprFrameBufferClear(radeon_context_->get_frame_buffer()));
 
-			ImVec2 mouse_delta = ImGui::GetMouseDragDelta(0, 0);
-			//scene->
 			ImGui::ResetMouseDragDelta(0);
 		}
 		else if (ImGui::IsMouseDown(1))
 		{
-			ImVec2 mouse_delta = ImGui::GetMouseDragDelta(1, 0);
-			//scene->
+			ImVec2 mouseDelta = ImGui::GetMouseDragDelta(1, 0);
+			
+
+
+
+
+
+
 			ImGui::ResetMouseDragDelta(1);
 		}
 		else if (ImGui::IsMouseDown(2))
 		{
-			ImVec2 mouse_delta = ImGui::GetMouseDragDelta(2, 0);
-			//scene->
+			ImVec2 mouseDelta = ImGui::GetMouseDragDelta(2, 0);
+
+
+
+
+
+
+
 			ImGui::ResetMouseDragDelta(2);
 		}
-		//scene->dirty = true;
-	}
-
-	// quit window
-	if (glfwWindowShouldClose(window))
-	{
-		is_running_ = false;
 
 	}
+
+	//CHECK(rprFrameBufferClear(radeon_context_->get_frame_buffer()));
+
 }
 
 // on close
@@ -242,8 +185,6 @@ void BJE_window::close()
 	// Shutdown the renderer
 	is_running_ = false;
 }
-
-
 
 // render window
 void BJE_window::render()
@@ -277,7 +218,6 @@ void BJE_window::render()
 	
 	// Debug console
 	debug_console_->render();
-
 	
 
 	if (close_window == true)
@@ -291,9 +231,10 @@ void BJE_window::render()
 	opengl_context_->post_render();
 	radeon_context_->post_render();
 
-	// update window
-	update(BJE_window_);
+	//update(BJE_window_);
+	//
 }
+
 
 
 

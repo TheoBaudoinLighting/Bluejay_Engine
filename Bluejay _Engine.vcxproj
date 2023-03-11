@@ -121,7 +121,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;DEBUG;TBB_USE_DEBUG;__SSE__;__SSE2__;RPR_API_USE_HEADER_V2;USE_GLFW;__TBB_NO_IMPLICIT_LINKAGE=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\RadeonProRender\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;$(SolutionDir)engine\;$(SolutionDir)engine\core;$(SolutionDir)engine\window;$(SolutionDir)engine\math;$(SolutionDir)engine\impl;$(SolutionDir)engine\external\RadeonProRender\inc;$(SolutionDir)engine\external\RadeonProRender\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine\external\RadeonProRender\include;$(SolutionDir)engine\external\glad\include;$(SolutionDir)engine\external\glad\src;$(SolutionDir)engine\external\glfw\include;$(SolutionDir)engine\external\imgui;$(SolutionDir)engine\external\glm;$(SolutionDir)engine\external\eigen;$(SolutionDir)engine\;$(SolutionDir)engine\core;$(SolutionDir)engine\window;$(SolutionDir)engine\math;$(SolutionDir)engine\impl;$(SolutionDir)engine\external\RadeonProRender\inc;$(SolutionDir)engine\external\RadeonProRender\common;$(SolutionDir)engine\external\assimp\include;$(SolutionDir)engine\external\RadeonRays;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
@@ -135,8 +135,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)engine\external\RadeonProRender\libWin64;$(SolutionDir)engine\external\glfw\lib-vc2022;$(SolutionDir)engine\external\tbb\lib\intel64\vc14\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RadeonProRender64.lib;RprLoadStore64.lib;opengl32.lib;glu32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)engine\external\RadeonProRender\libWin64;$(SolutionDir)engine\external\glfw\lib-vc2022;$(SolutionDir)engine\external\tbb\lib\intel64\vc14\;$(SolutionDir)engine\external\assimp\lib\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>RadeonProRender64.lib;RprLoadStore64.lib;assimp-vc143-mtd.lib;opengl32.lib;glu32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64 /NXCompat /DynamicBase</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -171,6 +171,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\inputs\bje_inputs.cpp" />
+    <ClCompile Include="engine\external\RadeonRays\bbox.cpp" />
+    <ClCompile Include="engine\external\RadeonRays\bvh.cpp" />
+    <ClCompile Include="engine\external\RadeonRays\split_bvh.cpp" />
+    <ClCompile Include="engine\mesh\bje_importer.cpp" />
     <ClCompile Include="engine\external\RadeonProRender\common\common.cpp" />
     <ClCompile Include="engine\external\RadeonProRender\inc\Math\half.cpp" />
     <ClCompile Include="engine\shader\bje_shader.cpp" />
@@ -196,6 +201,99 @@
     <ClCompile Include="engine\external\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\inputs\bje_inputs.h" />
+    <ClInclude Include="engine\external\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="engine\external\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="engine\external\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\aabb.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\ai_assert.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\anim.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\AssertHandler.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Base64.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\BaseImporter.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Bitmap.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\BlobIOSystem.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\ByteSwapper.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\camera.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\cexport.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\cfileio.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\cimport.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\ColladaMetaData.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\color4.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\commonMetaData.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\config.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\DefaultIOStream.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\defs.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Exceptional.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Exporter.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\fast_atof.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\GenericProperty.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\GltfMaterial.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Hash.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Importer.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\importerdesc.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\IOStream.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\IOSystem.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\light.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\LineSplitter.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\LogAux.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Logger.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\LogStream.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\material.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\MathFunctions.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\matrix3x3.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\matrix4x4.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\mesh.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\metadata.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\NullLogger.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\ObjMaterial.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\ParsingUtils.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\pbrmaterial.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\postprocess.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Profiler.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="engine\external\assimp\include\assimp\qnan.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\quaternion.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\RemoveComments.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\scene.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\SceneCombiner.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\SGSpatialSort.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\SmallVector.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\SmoothingGroups.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\SpatialSort.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\StandardShapes.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\StreamReader.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\StreamWriter.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\StringComparison.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\StringUtils.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Subdivision.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\texture.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\TinyFormatter.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\types.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\vector2.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\vector3.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\version.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\Vertex.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\XmlParser.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\XMLTools.h" />
+    <ClInclude Include="engine\external\assimp\include\assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="engine\external\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="engine\external\assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
+    <ClInclude Include="engine\external\RadeonRays\bbox.h" />
+    <ClInclude Include="engine\external\RadeonRays\bvh.h" />
+    <ClInclude Include="engine\external\RadeonRays\split_bvh.h" />
+    <ClInclude Include="engine\mesh\bje_importer.h" />
     <ClInclude Include="engine\external\RadeonProRender\common\common.h" />
     <ClInclude Include="engine\external\RadeonProRender\common\picojson.h" />
     <ClInclude Include="engine\external\RadeonProRender\common\tiny_obj_loader.h" />
@@ -850,6 +948,14 @@
     <ClInclude Include="engine\window\config\bje_window_config.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="engine\external\assimp\include\assimp\color4.inl" />
+    <None Include="engine\external\assimp\include\assimp\material.inl" />
+    <None Include="engine\external\assimp\include\assimp\matrix3x3.inl" />
+    <None Include="engine\external\assimp\include\assimp\matrix4x4.inl" />
+    <None Include="engine\external\assimp\include\assimp\quaternion.inl" />
+    <None Include="engine\external\assimp\include\assimp\SmoothingGroups.inl" />
+    <None Include="engine\external\assimp\include\assimp\vector2.inl" />
+    <None Include="engine\external\assimp\include\assimp\vector3.inl" />
     <None Include="engine\external\embree\bin\models\cornell_box.xml.bin" />
     <None Include="engine\external\embree\bin\models\cornell_box_mblur.xml.bin" />
     <None Include="engine\external\embree\bin\models\furBall_A.bin" />

@@ -1,6 +1,7 @@
 // Config file for the ui module
 #pragma once
 
+#include <future>
 #include <string>
 #include <vector>
 
@@ -31,6 +32,6 @@ namespace ui_render
 
 		glm::vec2 size_{};
 		std::vector<float> frame;
-
+		std::future<void> async_renderer_;
 	};
 }

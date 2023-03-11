@@ -1,5 +1,7 @@
 #include "bje_debug.h"
 
+#include <future>
+
 #include "bje_window.h"
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
@@ -16,7 +18,7 @@ namespace ui_render
 	void ui_render::BJE_Debug::init_ui()
 	{
 		// Setup debug console here
-
+		//async_renderer_ = std::async(std::launch::async, &BJE_Debug::render, this);
 	}
 
 	void ui_render::BJE_Debug::render()
@@ -59,22 +61,7 @@ namespace ui_render
 
 		
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		
 
 		// quit button
 		if (ImGui::Button("Quit"))
@@ -92,6 +79,8 @@ namespace ui_render
 
 	void ui_render::BJE_Debug::quit_ui()
 	{
+		//async_renderer_.wait();
+
 		// Post Render
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

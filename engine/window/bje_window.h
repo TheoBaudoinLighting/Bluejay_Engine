@@ -80,15 +80,15 @@ private:
 
 	GLuint texture_ = radeon_context_->get_texture();*/
 
-
+	std::future<void> async_renderer_;
 
 	unsigned int batch_size_ = 15;
 
 	bool is_running_;
 	bool is_fullscreen_;
+	bool key_pressed = false;
 
 	// Inputs
-
 	char key_states_[256];
 
 	char key_up_;
@@ -104,4 +104,6 @@ private:
 
 	glm::vec2 mouse_position_;
 	glm::vec2 mouse_motion_;
+
+
 };
